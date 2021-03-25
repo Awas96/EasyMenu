@@ -13,12 +13,12 @@ class AlergenoController extends AbstractController
     /**
      * @Route("/alergeno/listar", name="lista_alergenos")
      */
-    public function listaAlergenos(AlergenoRepository $alergenoRepository, Alergeno $alergeno): Response
+    public function listaAlergenos(AlergenoRepository $alergenoRepository): Response
     {
         $alergenos = $alergenoRepository->findAll();
         return $this->render('alergeno/listar.html.twig', [
             'controller_name' => 'AlergenoController',
-            'alergenos' => $alergeno
+            'alergenos' => $alergenos
         ]);
     }
 }

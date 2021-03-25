@@ -1,0 +1,25 @@
+body {
+
+}
+.headerImage {
+    width: 150px;
+}
+.displayFlex {
+    display: flex;
+}
+.colorCabecera {
+    background-color: forestgreen;
+    color: white;
+}
+.cabecera {
+    padding: 1em;
+    width: 100%;
+    justify-content: space-around;
+}
+.TituloGrande{
+    font-size: 5em;
+    font-weight: lighter;
+}
+.TituloPequenio {
+    font-style: italic;
+}
