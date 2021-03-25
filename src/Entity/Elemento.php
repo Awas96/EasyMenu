@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\EntidadRepository;
+use App\Repository\ElementoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EntidadRepository::class)
+ * @ORM\Entity(repositoryClass=ElementoRepository::class)
  * @ORM\Table(name="Elemento")
  */
 class Elemento
@@ -35,8 +37,8 @@ class Elemento
     private $seccion;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Alergeno", inversedBy="elementos")
-     * @ORM\JoinColumn(name="elementos_alergenos")
+     * @ORM\ManyToMany(targetEntity="Alergeno", cascade={"persist"})
+     * @ORM\JoinColumn(name="Alergeno_id", referencedColumnName="id")
      */
     private $alergenos;
 
@@ -89,5 +91,29 @@ class Elemento
     public function setSeccion($seccion): void
     {
         $this->seccion = $seccion;
+    }
+
+    /**
+     * @return Collection|Alergeno[]
+     */
+    public function getAlergenos(): Collection
+    {
+        return $this->alergenos;
+    }
+
+    public function addAlergeno(Alergeno $alergeno): self
+    {
+        if (!$this->alergenos->contains($alergeno)) {
+            $this->alergenos[] = $alergeno;
+        }
+
+        return $this;
+    }
+
+    public function removeAlergeno(Alergeno $alergeno): self
+    {
+        $this->alergenos->removeElement($alergeno);
+
+        return $this;
     }
 }

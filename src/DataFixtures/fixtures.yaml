@@ -1,0 +1,32 @@
+App\Entity\Alergeno:
+  a_Gluten:
+    nombre: "Gluten"
+    descripcion: "Gluten"
+  a_Sesamo:
+    nombre: "sesamo"
+    descripcion: "sesamo"
+  a_Cacahuetes:
+    nombre: "cacahuetes"
+    descripcion: "cacahuetes"
+  a_Soja:
+    nombre: "soja"
+    descripcion: "soja"
+
+App\Entity\Elemento:
+  elemento{1..40}:
+    nombre: <es_PE:word()>
+    precio: <randomFloat(2,0,25)>
+    seccion: '@s_*'
+    alergenos (unique): "<numberBetween(1,3)>x @a_*"
+
+
+App\Entity\Seccion:
+  s_carne:
+    nombre: <es_ES:word()>
+    elementos: "<numberBetween(1, 10)>x @elemento*"
+  s_verdura:
+    nombre: <es_ES:word()>
+    elementos: "<numberBetween(1, 10)>x @elemento*"
+  tapas:
+    nombre: <es_ES:word()>
+    elementos: "<numberBetween(1, 10)>x @elemento*"

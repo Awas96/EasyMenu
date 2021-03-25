@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AlergenoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,10 +35,7 @@ class Alergeno
      */
     private $imgRuta;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Elemento", mappedBy="alergenos")
-     */
-    private $elementos;
+
 
     public function __construct()
     {
@@ -81,6 +79,33 @@ class Alergeno
     public function setImgRuta(string $imgRuta): self
     {
         $this->imgRuta = $imgRuta;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Elemento[]
+     */
+    public function getElementos(): Collection
+    {
+        return $this->elementos;
+    }
+
+    public function addElemento(Elemento $elemento): self
+    {
+        if (!$this->elementos->contains($elemento)) {
+            $this->elementos[] = $elemento;
+            $elemento->addAlergeno($this);
+        }
+
+        return $this;
+    }
+
+    public function removeElemento(Elemento $elemento): self
+    {
+        if ($this->elementos->removeElement($elemento)) {
+            $elemento->removeAlergeno($this);
+        }
 
         return $this;
     }
