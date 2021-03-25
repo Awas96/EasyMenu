@@ -30,9 +30,22 @@ class Elemento
 
     /**
      * @ORM\ManyToOne(targetEntity="Seccion", inversedBy="elementos"
-     *
+     * @ORM\JoinColumn(nullable=false)
      */
     private $seccion;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Alergeno", inversedBy="elementos")
+     * @joinTable(name="elementos_alergenos")
+     */
+    private $alergenos;
+
+
+    public function __construct()
+    {
+        $this->seccion =  new ArrayCollection();
+        $this->alergenos =  new ArrayCollection();
+    }
 
 
     public function getId(): ?int

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AlergenoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,9 +29,21 @@ class Alergeno
     private $descripcion;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $imgRuta;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Elemento", mappedBy="alergenos")
+     */
+    private $elementos;
+
+
+    public function __construct()
+    {
+        $this->elementos =  new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
