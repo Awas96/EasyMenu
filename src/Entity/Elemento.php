@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=EntidadRepository::class)
+ * @ORM\Table(name="Elemento")
  */
 class Elemento
 {
@@ -26,6 +27,13 @@ class Elemento
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      */
     private $precio;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Seccion", inversedBy="elementos"
+     *
+     */
+    private $seccion;
+
 
     public function getId(): ?int
     {
@@ -54,5 +62,21 @@ class Elemento
         $this->precio = $precio;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeccion()
+    {
+        return $this->seccion;
+    }
+
+    /**
+     * @param mixed $seccion
+     */
+    public function setSeccion($seccion): void
+    {
+        $this->seccion = $seccion;
     }
 }
