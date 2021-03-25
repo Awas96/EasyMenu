@@ -25,7 +25,7 @@ class Seccion
     private $Nombre;
 
     /**
-     * @ORM\OneToMany(targetEntity="Elemento", mappedBy="seccion"
+     * @ORM\OneToMany(targetEntity="Elemento", mappedBy="seccion")
      *
      */
     private $elementos;

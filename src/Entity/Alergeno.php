@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AlergenoRepository::class)
+ * @ORM\Table(name="Alergeno")
  */
 class Alergeno
 {
@@ -38,12 +39,10 @@ class Alergeno
      */
     private $elementos;
 
-
     public function __construct()
     {
-        $this->elementos =  new ArrayCollection();
+        $this->elementos = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
