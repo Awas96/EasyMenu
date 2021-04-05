@@ -36,15 +36,14 @@ class ElementoRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Elemento
+
+    public function listarElementos($Seccion)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
+            ->where('e.seccion = :seccion')
+            ->setParameter('seccion', $Seccion)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
+
 }
