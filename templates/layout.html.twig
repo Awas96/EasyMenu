@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {% block estilos %} {% endblock %}
 {% endblock %}
 {% block body %}
 
@@ -11,7 +12,6 @@
                 <h1 class="TituloGrande" > CLUB 79 </h1>
                 <h1 class="TituloPequenio" > Restaurante Antonio Díaz Franco </h1>
             </div>
-
         </div>
     </nav>
     <div class="contenido">

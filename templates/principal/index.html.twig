@@ -2,6 +2,21 @@
 
 {% block title %}Página principal!{% endblock %}
 
-{% block content%}
-    <p class="p-4 text-center fw-bolder"> <i class="fas fa-wrench "></i> Página en construccion...</p>
+{% block content %}
+    {% if seccion %}
+        {% include  'secciones/secciones_listar.partial.html.twig' %}
+        <hr>
+    {% endif %}
+    {% if elementos is defined %}
+        {% include 'elemento/elementos_listar.partial.html.twig' %}
+        <hr>
+    {% endif %}
+    {% block seccion %} {% endblock %}
+    <p class="p-4 text-center fw-bolder"><i class="fas fa-wrench "></i> Página en construccion...</p>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/burbujas.css') }}">
 {% endblock %}
