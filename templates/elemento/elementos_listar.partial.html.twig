@@ -1,8 +1,35 @@
-<ol>
-    {% for i in elementos %}
-        <li>
-            {{ i.nombre }}
-        </li>
-    {% endfor %}
-</ol>
+<div class="fondoOpaco">
+    <h2 class="text-center TituloGrande p-3">
+        <i class="fas fa-utensils"></i>
+        <div>{{ elementos[0].seccion.nombre }}</div>
+    </h2>
+</div>
+<hr>
+<div class="tablaOrden fondoOpaco">
+    <table class="table letraGrande">
+        <thead class="cabeceraTabla">
+        <tr>
+            <th>Nombre</th>
+            <th></th>
+            <th>Precio</th>
+            <th>Alérgenos</th>
+        </tr>
+        </thead>
+        {% for i in elementos %}
+            <tr>
+                <td class="paddingTupla">{{ i.nombre }}</td>
+                <td>........</td>
+                <td>
+                    <div class="ordenPrecio">{{ i.precio }}</div>
+                </td>
+                <td>
+                    {% for a in i.alergenos %}
+                        {{ a.id }}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
 

@@ -42,6 +42,12 @@ class Alergeno
         $this->elementos = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+       return "alergenos!";
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

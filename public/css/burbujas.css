@@ -24,13 +24,14 @@
     border-radius: 35px;
 }
 .fondoSecciones{
-    background-color: antiquewhite;
+    background-color:rgba(100,100,100,0.3);
     padding: 1em;
+    margin-bottom: -1em;
 }
 .burbuja {
     background-color: white;
-    height: 7em;
-    width: 7em;
+    height: 10em;
+    width: 10em;
     margin: 0.3em;
     border-radius: 100%;
     transition: transform .2s;
@@ -39,21 +40,19 @@
 .burbuja li{
     width: 100%;
     height: 100%;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 .burbuja:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 .relleno {
-    padding-top: 0.3em;
-    padding-bottom: 1.5em;
-    padding-left: 100%;
-    padding-right: 100%;
-    align-self: center;
+    padding-top: 25%;
+    padding-bottom: 25%;
+    justify-self: center;
+    font-size: 1.8em;
 }
-.burbuja_fondo_azul{background-color: deepskyblue;color: red}
-.burbuja_fondo_azul a {color: black}
-.burbuja_fondo_rojo{background-color: red;}
-.burbuja_fondo_verde{background-color: forestgreen;}
-.burbuja_fondo_amarillo{background-color: yellow;}
-.burbuja_fondo_naranja{background-color: orange;}
-.burbuja_fondo_morado{background-color: mediumpurple;}
+.burbuja_fondo{background-color: rgba(171,150,89,1)}
+.burbuja_fondo a {color: black}
