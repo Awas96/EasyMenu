@@ -10,12 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ElementoController extends AbstractController
 {
     /**
-     * @Route("/elemento/listar", name="lista_elementos")
+     * @Route("/elemento/listar/{sec}", name="lista_elementos")
      */
-    public function listaElementos(ElementoRepository $elementoRepository): Response
+    public function listaElementos(ElementoRepository $elementoRepository, $sec): Response
     {
-        $elemento = $elementoRepository->findAll();
-        return $this->render('elemento/index.html.twig', [
+        $elemento = $elementoRepository->listarElementos($sec);
+        return $this->render('elemento/listar.html.twig', [
             'controller_name' => 'ElementoController',
             'elementos' => $elemento
         ]);

@@ -15,7 +15,7 @@ class SeccionesController extends AbstractController
     public function seccionesListar(SeccionRepository $seccionRepository): Response
     {
         $secciones = $seccionRepository->findAll();
-        return $this->render('secciones/index.html.twig', [
+        return $this->render('secciones/listar.html.twig', [
             'controller_name' => 'SeccionesController',
             'seccion' => $secciones
         ]);
