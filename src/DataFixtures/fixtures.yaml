@@ -1,20 +1,64 @@
 App\Entity\Alergeno:
+  a_Altramuz:
+    nombre: "Altramuz"
+    descripcion: "Altramuz"
+    imgRuta: "Altramuz.png"
+  a_Apio:
+    nombre: "Apio"
+    descripcion: "Apio"
+    imgRuta: "Apio.png"
+  a_Cacahuetes:
+    nombre: "Cacahuetes"
+    descripcion: "Cacahuetes"
+    imgRuta: "Cacahuetes.png"
+  a_Crustáceos:
+    nombre: "Crustáceos"
+    descripcion: "Crustáceos"
+    imgRuta: "Crustaceos.png"
+  a_Frutos Secos:
+    nombre: "Frutos Secos"
+    descripcion: "Frutos Secos"
+    imgRuta: "FrutosSecos.png"
   a_Gluten:
     nombre: "Gluten"
     descripcion: "Gluten"
+    imgRuta: "Gluten.png"
+  a_Huevos:
+    nombre: "Huevos"
+    descripcion: "Huevos"
+    imgRuta: "Huevos.png"
+  a_Lacteos:
+    nombre: "Lacteos"
+    descripcion: "Lacteos"
+    imgRuta: "Lacteos.png"
+  a_Moluscos:
+    nombre: "Moluscos"
+    descripcion: "Moluscos"
+    imgRuta: "Moluscos.png"
+  a_Mostaza:
+    nombre: "Mostaza"
+    descripcion: "Mostaza"
+    imgRuta: "Mostaza.png"
+  a_Pescados:
+    nombre: "Pescados"
+    descripcion: "Pescados"
+    imgRuta: "Pescado.png"
   a_Sesamo:
-    nombre: "sesamo"
-    descripcion: "sesamo"
-  a_Cacahuetes:
-    nombre: "cacahuetes"
-    descripcion: "cacahuetes"
+    nombre: "Sésamo"
+    descripcion: "Sésamo"
+    imgRuta: "Sesamo.png"
   a_Soja:
-    nombre: "soja"
-    descripcion: "soja"
+    nombre: "Soja"
+    descripcion: "Soja"
+    imgRuta: "Soja.png"
+  a_Sulfitos:
+    nombre: "Sulfitos"
+    descripcion: "Sulfitos"
+    imgRuta: "Sulfitos.png"
 
 App\Entity\Elemento:
-  elemento{1..40}:
-    nombre: <es_PE:word()>
+  elemento{1..150}:
+    nombre: <es_ES:word()>
     precio: <randomFloat(2,0,25)>
     seccion: '@s_*'
     alergenos (unique): "<numberBetween(1,3)>x @a_*"
@@ -22,11 +66,21 @@ App\Entity\Elemento:
 
 App\Entity\Seccion:
   s_carne:
-    nombre: <es_ES:word()>
+    nombre: "Carne"
     elementos: "<numberBetween(1, 10)>x @elemento*"
   s_verdura:
-    nombre: <es_ES:word()>
+    nombre: "Verduras"
     elementos: "<numberBetween(1, 10)>x @elemento*"
-  tapas:
-    nombre: <es_ES:word()>
+  s_tapas:
+    nombre: "Tapas"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+  s_pescados:
+    nombre: "Pescados"
+    elementos: "<numberBetween(1, 10)>x @elemento*"
+  s_entrantes:
+    nombre: "Entrantes"
+    elementos: "<numberBetween(1, 10)>x @elemento*"
+  s_cosas{1..10}:
+    nombre: "Cosas"
+    elementos: "<numberBetween(1, 10)>x @elemento*"
+
