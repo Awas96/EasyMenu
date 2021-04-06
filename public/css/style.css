@@ -57,5 +57,9 @@ a {
     padding-left: 1em;
 }
 
-/* Clases para los elementos */
+.imgAlergeno {
+    display: inline-flex;
+    height: 1.5em;
+    width: 1.5em;
+}
 

@@ -34,7 +34,7 @@
 
                     {% for a in i.alergenos %}
                         <div class="imgAlergeno">
-                            <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}" alt="{{ a.nombre }}">
+                            <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}" title="{{ a.nombre }}" alt="{{ a.nombre }}">
                         </div>
                     {% endfor %}
 
