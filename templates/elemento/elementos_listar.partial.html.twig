@@ -1,44 +1,69 @@
+{% if elementos[0] is defined %}
+    {% set sect =  elementos[0].seccion.nombre %}
+{% else %}
+    {% set sect = "¡Sección Vacía!" %}
+{% endif %}
+
 <div class="fondoOpaco">
     <h2 class="text-center TituloGrande p-3">
-        <i class="fas fa-utensils"></i>
+        {% if elementos[0].seccion.icono is defined %}
+        {% if elementos[0].seccion.icono is not null %}
+            <i class="fas {{ elementos[0].seccion.icono }}"></i>
+        {% else %}
+            <i class="fas fa-utensils"></i>
+        {% endif %}
+        {% endif %}
         <div>
-            {% if elementos[0] is defined %}
-                {% set sect =  elementos[0].seccion.nombre %}
-            {% else %}
-                {% set sect = "¡Sección Vacía!" %}
-            {% endif %}
-
             {{ sect }}
         </div>
     </h2>
 </div>
 <hr>
 <div class="tablaOrden fondoOpaco">
-    <table class="table letraGrande">
+    <table class="table letraGrande {% if sect == 'Tapas' %}text-center{% endif%}">
         <thead class="cabeceraTabla">
         <tr>
             <th>Nombre</th>
-            <th></th>
-            <th>Precio</th>
-            <th>Alérgenos</th>
+
+            {% if sect != 'Tapas' %}
+                <th>Precio</th>
+            {% endif %}
         </tr>
         </thead>
         {% for i in elementos %}
             <tr>
-                <td class="paddingTupla">{{ i.nombre }}</td>
-                <td>........</td>
-                <td>
-                    <div class="ordenPrecio">{{ i.precio }}</div>
+                <td class="paddingTupla">{{ i.nombre }}
+                    <div class="alergenos escondido">
+                        <table class="table">
+                        {% for a in i.alergenos %}
+                                <tr>
+                                    <td>
+                                        <div class="imgAlergeno">
+                                            <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}" title="{{ a.nombre }}"
+                                                 alt="{{ a.nombre }}">
+                                        </div>
+                                    </td>
+                                    <td class="">
+                                        <span>{{ a.descripcion }}</span>
+                                    </td>
+                                </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
                 </td>
-                <td>
 
-                    {% for a in i.alergenos %}
-                        <div class="imgAlergeno">
-                            <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}" title="{{ a.nombre }}" alt="{{ a.nombre }}">
-                        </div>
-                    {% endfor %}
+                {% if sect != 'Tapas' %}
+                    <td class="tuplaPrecio">
+                        <span>
+                            {% if i.precio < 10 %}
+                                &nbsp
+                            {% endif %}
+                            {{ i.precio }}&nbsp€
+                        </span>
 
-                </td>
+                    </td>
+                {% endif %}
+
             </tr>
         {% endfor %}
     </table>

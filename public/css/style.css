@@ -38,7 +38,7 @@ a {
 }
 
 .letraGrande {
-    font-size: 3em;
+    font-size: 3.5em;
 }
 
 .fondoOpaco {
@@ -48,7 +48,7 @@ a {
 }
 
 .tablaOrden {
-    text-align: justify;
+    text-align: left;
     padding: 1em;
 
 }
@@ -56,10 +56,43 @@ a {
 .paddingTupla{
     padding-left: 1em;
 }
-
+.alergenos{
+    position: absolute;
+    transform: translate(0.5em, 0em);
+    background-color: rgba(171,150,89,0.8);
+    border: 5px solid rgba(5,21,1,0.7);
+    border-radius: 7px;
+    padding: 0.3em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.alergenos::before{
+    content: ' ';
+    height: 0;
+    position: absolute;
+    width: 0;
+    left: 0;
+    top: -0.7em;
+    border: 0.3em solid transparent;
+    border-bottom-color: rgba(5,21,1,0.7);
+}
+.alergenos span{
+    font-size: 2rem;
+    color: black;
+}
 .imgAlergeno {
     display: inline-flex;
-    height: 1.5em;
-    width: 1.5em;
+    height: 3em;
+    width: 3em;
+    margin: -0.1em;
 }
+
+.tuplaPrecio {
+   vertical-align: bottom;
+}
+
+.escondido {
+    display: none;
+}
+
 
