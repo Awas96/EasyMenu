@@ -1,7 +1,15 @@
 <div class="fondoOpaco">
     <h2 class="text-center TituloGrande p-3">
         <i class="fas fa-utensils"></i>
-        <div>{{ elementos[0].seccion.nombre }}</div>
+        <div>
+            {% if elementos[0] is defined %}
+                {% set sect =  elementos[0].seccion.nombre %}
+            {% else %}
+                {% set sect = "¡Sección Vacía!" %}
+            {% endif %}
+
+            {{ sect }}
+        </div>
     </h2>
 </div>
 <hr>
@@ -23,9 +31,13 @@
                     <div class="ordenPrecio">{{ i.precio }}</div>
                 </td>
                 <td>
+
                     {% for a in i.alergenos %}
-                        {{ a.id }}
+                        <div class="imgAlergeno">
+                            <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}" alt="{{ a.nombre }}">
+                        </div>
                     {% endfor %}
+
                 </td>
             </tr>
         {% endfor %}
