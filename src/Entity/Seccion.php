@@ -26,6 +26,11 @@ class Seccion
     private $nombre;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $icono;
+
+    /**
      * @ORM\OneToMany(targetEntity="Elemento", mappedBy="seccion")
      *
      */
@@ -93,6 +98,17 @@ class Seccion
         return $this;
     }
 
+    public function getIcono(): ?string
+    {
+        return $this->icono;
+    }
+
+    public function setIcono(?string $icono): self
+    {
+        $this->icono = $icono;
+
+        return $this;
+    }
 
 
 }

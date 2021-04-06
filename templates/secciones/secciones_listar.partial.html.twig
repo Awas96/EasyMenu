@@ -3,7 +3,13 @@
         <div class="burbuja burbuja_fondo">
             <li>
                 <a class="relleno" href="{{ path('indexSec', {'sec': sec.id} ) }}">
-                    <div><i class="fas fa-utensils"></i></div>
+                    <div>
+                        {% if sec.icono %}
+                            <i class="fas {{ sec.icono }}"></i>
+                        {% else %}
+                            <i class="fas fa-utensils"></i>
+                        {% endif %}
+                    </div>
                     <div>{{ sec.nombre }}</div>
                 </a>
             </li>

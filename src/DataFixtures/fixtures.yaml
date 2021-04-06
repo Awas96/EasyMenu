@@ -60,6 +60,7 @@ App\Entity\Elemento:
   elemento{1..150}:
     nombre: <es_ES:word()>
     precio: <randomFloat(2,0,25)>
+
     seccion: '@s_*'
     alergenos (unique): "<numberBetween(1,3)>x @a_*"
 
@@ -68,19 +69,25 @@ App\Entity\Seccion:
   s_carne:
     nombre: "Carne"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    icono: "fa-bacon"
   s_verdura:
     nombre: "Verduras"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    icono: "fa-leaf"
   s_tapas:
     nombre: "Tapas"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    icono: "fa-utensils"
   s_pescados:
     nombre: "Pescados"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    icono: "fa-fish"
   s_entrantes:
     nombre: "Entrantes"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    icono: "fa-utensil-spoon"
   s_cosas{1..10}:
     nombre: "Cosas"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+
 
