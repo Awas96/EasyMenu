@@ -62,7 +62,7 @@ App\Entity\Elemento:
     precio: <randomFloat(2,0,25)>
 
     seccion: '@s_*'
-    alergenos (unique): "<numberBetween(1,3)>x @a_*"
+    alergenos (unique): "<numberBetween(1,14)>x @a_*"
 
 
 App\Entity\Seccion:
