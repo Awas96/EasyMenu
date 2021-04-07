@@ -9,17 +9,20 @@
         <div class="displayFlex cabecera">
             <img class="headerImage" src="{{ asset('img/logo.png') }}">
             <div class="font-weight-bolder align-self-center text-center">
-                <h1 class="TituloGrande" > CLUB 79 </h1>
-                <h1 class="TituloPequenio" > Restaurante Antonio Díaz Franco </h1>
+                <h1 class="TituloGrande"> CLUB 79 </h1>
+                <h1 class="TituloPequenio"> Restaurante Antonio Díaz Franco </h1>
             </div>
         </div>
     </nav>
     <div class="contenido">
         {% block content %}{% endblock content %}
-        <footer class="colorCabecera p-4  blockquote-footer ">
-            <h6 class="displayFlex justify-content-around"><span>Jose Antonio Roselló Lopez</span><span class="fw-bolder">©IMS Linares 2021</span></h6>
+        <footer class="footer colorCabecera p-4 ">
+            <h6 class="displayFlex justify-content-around"><span>Jose Antonio Roselló Lopez</span><span
+                        class="fw-bolder">©IMS Linares 2021</span>
+            </h6>
         </footer>
     </div>
+
 
 
 {% endblock body %}

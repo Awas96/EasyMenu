@@ -4,10 +4,12 @@ a {
 
 .imagenFondo{
     background-image: url(../img/bgimage.jpg);
+    height: 100%;
+!important;
     min-height: 100vh;
+    background-position: center;
     background-size: cover;
-    background-position: right;
-
+    padding-bottom: 1em;
 }
 .contenido{
 
@@ -15,7 +17,7 @@ a {
     height: 100%;
     width: 100%;
     min-height: 100vh;
-    padding-bottom: 1em;
+
 }
 /* Clases para el header */
 .headerImage {
@@ -60,14 +62,14 @@ a {
 .paddingTupla{
     padding-left: 1em;
 }
-.alergenos{
+.alergenos {
     pointer-events: none;
     position: absolute;
     max-width: 80vw;
     transform: translate(0, 1.6em);
-    background-color: rgba(0,0,0,0.8);
-    border: 1px solid rgba(255,255,255,0.7);
-    border-radius: 7px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
     padding: 0.3em;
     padding-left: 1em;
     padding-right: 1em;
@@ -90,7 +92,6 @@ a {
     display: flex;
     height: 3em;
     width: 3em;
-    margin: 0em;
 }
 .toggler{
     -webkit-transition: all 0.1s linear 0s;
