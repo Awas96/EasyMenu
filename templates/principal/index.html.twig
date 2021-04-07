@@ -3,17 +3,20 @@
 {% block title %}Carta{% endblock %}
 
 {% block content %}
-    {% if seccion %}
-        {% include  'secciones/secciones_listar.partial.html.twig' %}
-        <hr>
-    {% endif %}
-    {% if elementos is defined %}
-        {% include 'elemento/elementos_listar.partial.html.twig' %}
-    {% endif %}
-    {% block seccion %} {% endblock %}
+    <div class="imagenFondo">
+        {% if seccion %}
+            {% include  'secciones/secciones_listar.partial.html.twig' %}
+            <hr>
+        {% endif %}
+        {% if elementos is defined %}
+            {% include 'elemento/elementos_listar.partial.html.twig' %}
+        {% endif %}
+        {% block seccion %} {% endblock %}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/toggler.js') }}"></script> {# Utilizado para mostrar o esconder elementos quitando o poniendo clases #}
 {% endblock %}
 {% block estilos %}
     <link rel="stylesheet" href="{{ asset('css/burbujas.css') }}">

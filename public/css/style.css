@@ -4,12 +4,16 @@ a {
 
 .imagenFondo{
     background-image: url(../img/bgimage.jpg);
+    min-height: 100vh;
     background-size: cover;
     background-position: right;
 
 }
 .contenido{
+
+    max-width: 100vw;
     height: 100%;
+    width: 100%;
     min-height: 100vh;
     padding-bottom: 1em;
 }
@@ -57,10 +61,12 @@ a {
     padding-left: 1em;
 }
 .alergenos{
+    pointer-events: none;
     position: absolute;
-    transform: translate(0.5em, 0em);
-    background-color: rgba(171,150,89,0.8);
-    border: 5px solid rgba(5,21,1,0.7);
+    max-width: 80vw;
+    transform: translate(0, 1.6em);
+    background-color: rgba(0,0,0,0.8);
+    border: 1px solid rgba(255,255,255,0.7);
     border-radius: 7px;
     padding: 0.3em;
     padding-left: 1em;
@@ -71,24 +77,34 @@ a {
     height: 0;
     position: absolute;
     width: 0;
-    left: 0;
-    top: -0.7em;
+    left: calc(47%);
+    top: -0.6em;
     border: 0.3em solid transparent;
-    border-bottom-color: rgba(5,21,1,0.7);
+    border-bottom-color: rgba(0,0,0,0.7);
 }
 .alergenos span{
     font-size: 2rem;
     color: black;
 }
 .imgAlergeno {
-    display: inline-flex;
+    display: flex;
     height: 3em;
     width: 3em;
-    margin: -0.1em;
+    margin: 0em;
 }
-
+.toggler{
+    -webkit-transition: all 0.1s linear 0s;
+    transition: all 0.1s linear 0s;
+}
 .tuplaPrecio {
    vertical-align: bottom;
+}
+.cursor {
+    cursor: pointer ;
+}
+.esconder {
+    transform: scale(0.5);
+    opacity: 0;
 }
 
 .escondido {
