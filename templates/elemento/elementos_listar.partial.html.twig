@@ -20,7 +20,7 @@
 </div>
 <hr>
 <div class="tablaOrden fondoOpaco">
-    <table class="table letraGrande ">
+    <table class="table letraGrande  ">
         <thead class="cabeceraTabla">
         <tr>
             <th>Nombre</th>
@@ -31,21 +31,25 @@
         </tr>
         </thead>
         {% for i in elementos %}
-            <tr class="cursor">
-                <td class="paddingTupla displayFlex {% if sect == 'Tapas' %}justify-content-around
-{% else %} justify-content-between{% endif %} ">
-                    <div><span>{{ i.nombre }}</span></div>
-                    <div class="alergenos  toggler esconder displayFlex justify-content-around flex-wrap text-wrap">
-
+            <tr>
+                <td class="paddingTupla displayFlex toggler flex-column">
+                    <div class="
+                    {% if sect == 'Tapas' %} align-self-center
+                    {% endif %}">
+                        <span>·&nbsp{{ i.nombre }}</span>
+                    </div>
+                    <div class="alergenos ttip" style="display: none">
                         {% for a in i.alergenos %}
                             <div>
-                                <figure  class="displayFlex flex-column justify-content-center" >
-                                    <img class="imgAlergeno" src="{{ asset('img/alergenos/' ~ a.imgruta ) }}" title="{{ a.nombre }}"
+                                <figure class="displayFlex figuralergeno">
+                                    <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}"
+                                         title="{{ a.nombre }}"
                                          alt="{{ a.nombre }}">
-
+                                    <figcaption>{{ a.descripcion }}</figcaption>
                                 </figure>
                             </div>
                         {% endfor %}
+
                     </div>
                 </td>
 
@@ -65,5 +69,6 @@
         {% endfor %}
     </table>
 </div>
+
 
 

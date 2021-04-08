@@ -2,7 +2,7 @@ a {
     text-decoration: none;
 }
 
-.imagenFondo{
+.imagenFondo {
     background-image: url(../img/bgimage.jpg);
     height: 100%;
 !important;
@@ -11,34 +11,41 @@ a {
     background-size: cover;
     padding-bottom: 1em;
 }
-.contenido{
 
-    max-width: 100vw;
+.contenido {
+
+    min-width: 100vw;
     height: 100%;
     width: 100%;
     min-height: 100vh;
 
 }
+
 /* Clases para el header */
 .headerImage {
     width: 150px;
 }
+
 .displayFlex {
     display: flex;
 }
+
 .colorCabecera {
-    background-color: rgba(5,21,1,0.9);
+    background-color: rgba(5, 21, 1, 0.9);
     color: #ab9659;
 }
+
 .cabecera {
     padding: 1em;
     width: 100%;
     justify-content: space-around;
 }
-.TituloGrande{
+
+.TituloGrande {
     font-size: 5em;
     font-weight: lighter;
 }
+
 .TituloPequenio {
     font-style: italic;
 }
@@ -48,7 +55,7 @@ a {
 }
 
 .fondoOpaco {
-    background-color: rgba(100,100,100,0.2);
+    background-color: rgba(100, 100, 100, 0.2);
     border-radius: 5px;
     margin: 1.5em;
 }
@@ -59,57 +66,38 @@ a {
 
 }
 
-.paddingTupla{
+.paddingTupla {
     padding-left: 1em;
-}
-.alergenos {
-    pointer-events: none;
-    position: absolute;
-    max-width: 80vw;
-    transform: translate(0, 1.6em);
-    background-color: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 15px;
-    padding: 0.3em;
-    padding-left: 1em;
-    padding-right: 1em;
-}
-.alergenos::before{
-    content: ' ';
-    height: 0;
-    position: absolute;
-    width: 0;
-    left: calc(47%);
-    top: -0.6em;
-    border: 0.3em solid transparent;
-    border-bottom-color: rgba(0,0,0,0.7);
-}
-.alergenos span{
-    font-size: 2rem;
-    color: black;
-}
-.imgAlergeno {
-    display: flex;
-    height: 3em;
-    width: 3em;
-}
-.toggler{
-    -webkit-transition: all 0.1s linear 0s;
-    transition: all 0.1s linear 0s;
-}
-.tuplaPrecio {
-   vertical-align: bottom;
-}
-.cursor {
-    cursor: pointer ;
-}
-.esconder {
-    transform: scale(0.5);
-    opacity: 0;
 }
 
-.escondido {
-    display: none;
+.alergenos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+
+
+.figuralergeno {
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.3em;
+}
+
+.figuralergeno img {
+    display: flex;
+    align-self: center;
+    height: 2em;
+    width: 2em;
+}
+
+.figuralergeno figcaption {
+    align-self: center;
+    font-size: 0.7em;
+}
+
+.tuplaPrecio {
+    vertical-align: bottom;
+}
+
 
 
