@@ -42,6 +42,11 @@ class Elemento
      */
     private $alergenos;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $descripcion;
+
     public function __construct()
     {
         $this->seccion = new ArrayCollection();
@@ -113,6 +118,18 @@ class Elemento
     public function removeAlergeno(Alergeno $alergeno): self
     {
         $this->alergenos->removeElement($alergeno);
+
+        return $this;
+    }
+
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion(?string $descripcion): self
+    {
+        $this->descripcion = $descripcion;
 
         return $this;
     }

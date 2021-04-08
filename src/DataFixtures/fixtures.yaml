@@ -58,11 +58,11 @@ App\Entity\Alergeno:
 
 App\Entity\Elemento:
   elemento{1..150}:
-    nombre: <es_ES:word()>
+    nombre: 'Artículo de Ejemplo'
     precio: <randomFloat(2,0,25)>
-
+    descripcion: 'Aqui va la descripcion del artículo'
     seccion: '@s_*'
-    alergenos (unique): "<numberBetween(1,14)>x @a_*"
+    alergenos: "<numberBetween(1,14)>x @a_*"
 
 
 App\Entity\Seccion:

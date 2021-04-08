@@ -20,10 +20,16 @@
 </div>
 <hr>
 <div class="tablaOrden fondoOpaco">
-    <table class="table letraGrande  ">
+    <table class="table letraGrande ">
         <thead class="cabeceraTabla">
         <tr>
-            <th>Nombre</th>
+            <th class="
+                {% if sect == 'Tapas' %}
+                    text-center
+                {% endif %}
+                ">
+                Nombre
+            </th>
 
             {% if sect != 'Tapas' %}
                 <th>Precio</th>
@@ -31,25 +37,27 @@
         </tr>
         </thead>
         {% for i in elementos %}
-            <tr>
+            <tr class="filaTabla ">
                 <td class="paddingTupla displayFlex toggler flex-column">
-                    <div class="
+                    <div class=" nombreTabla
                     {% if sect == 'Tapas' %} align-self-center
                     {% endif %}">
                         <span>·&nbsp{{ i.nombre }}</span>
                     </div>
-                    <div class="alergenos ttip" style="display: none">
-                        {% for a in i.alergenos %}
-                            <div>
-                                <figure class="displayFlex figuralergeno">
-                                    <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}"
-                                         title="{{ a.nombre }}"
-                                         alt="{{ a.nombre }}">
-                                    <figcaption>{{ a.descripcion }}</figcaption>
-                                </figure>
-                            </div>
-                        {% endfor %}
-
+                    <div class="spoiler" style="display: none">
+                        <div class="descripcion">{{ i.descripcion }}</div>
+                        <div class="displayFlex flex-wrap justify-content-around">
+                            {% for a in i.alergenos %}
+                                <div>
+                                    <figure class="displayFlex figurspoiler">
+                                        <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}"
+                                             title="{{ a.nombre }}"
+                                             alt="{{ a.nombre }}">
+                                        <figcaption>{{ a.descripcion }}</figcaption>
+                                    </figure>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </td>
 
@@ -64,7 +72,6 @@
 
                     </td>
                 {% endif %}
-
             </tr>
         {% endfor %}
     </table>
