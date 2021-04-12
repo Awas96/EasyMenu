@@ -2,10 +2,10 @@ a {
     text-decoration: none;
 }
 
+/*Clases para el contenido de la web*/
 .imagenFondo {
     background-image: url(../img/bgimage.jpg);
     height: 100%;
-!important;
     min-height: 100vh;
     background-position: center;
     background-size: cover;
@@ -13,7 +13,6 @@ a {
 }
 
 .contenido {
-
     min-width: 100vw;
     height: 100%;
     width: 100%;
@@ -50,15 +49,7 @@ a {
     font-style: italic;
 }
 
-.letraGrande {
-    font-size: 3.5em;
-}
-
-.fondoOpaco {
-    background-color: rgba(100, 100, 100, 0.2);
-    border-radius: 5px;
-    margin: 1.5em;
-}
+/*Clases para la tabla principal que muestra los artículos*/
 
 .tablaOrden {
     text-align: left;
@@ -66,13 +57,10 @@ a {
 
 }
 
-.debug {
-    border: 1px solid black;
-}
-
-.filaTabla {
-
-
+.fondoOpaco {
+    background-color: rgba(100, 100, 100, 0.2);
+    border-radius: 5px;
+    margin: 1.5em;
 }
 
 .nombreTabla {
@@ -92,17 +80,16 @@ a {
     padding-left: 1em;
 }
 
-
+/* parte escondida de las tablas */
 .spoiler {
     margin-left: 1em;
     margin-right: 1em;
-
-
 }
 
 .descripcion {
     font-size: 0.8em;
 }
+
 
 .figurspoiler {
     flex-direction: column;
@@ -127,6 +114,7 @@ a {
     vertical-align: bottom;
 }
 
+/* botones para el final de la tabla  */
 .botonera {
 
     width: 95vw;
@@ -143,8 +131,24 @@ a {
     font-size: 2em;
 }
 
-.cursor {
-    cursor: pointer;
+/* Clases para los formularios */
+
+.formulario {
+    width: 50%;
+    margin: 0 auto;
+}
+
+/* Clases para funcionalidad  */
+
+.letraGrande {
+    font-size: 3.5em;
+}
+
+.debug {
+    border: 1px solid black;
 }
 
 
+.cursor {
+    cursor: pointer;
+}
