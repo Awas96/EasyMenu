@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="contenido">
+        <div class="formulario p-5">
+            <h1>Eliminar Seccion</h1>
+            <p>¿Seguro que deseas eliminar la sección "<b>{{ seccion.nombre }}</b>"?</p>
+            <p class="font-weight-bolder">Se borrará la sección con todos sus elementos...</p>
+            <p class="font-weight-bolder">Esta acción no se puede deshacer.</p>
+
+            <form method="post">
+                <button class="btn btn-danger" type="submit" name="confirmar">Sí, eliminar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

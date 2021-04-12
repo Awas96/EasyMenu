@@ -4,14 +4,14 @@
 
 {% block content %}
     <div class="imagenFondo">
-        {% if seccion %}
+        {% if secciones %}
             {% include  'secciones/secciones_listar.partial.html.twig' %}
             <hr>
         {% endif %}
         {% if elementos is defined %}
             {% include 'elemento/elementos_listar.partial.html.twig' %}
         {% endif %}
-        {% block seccion %} {% endblock %}
+        {% block secciones %} {% endblock %}
     </div>
 {% endblock %}
 

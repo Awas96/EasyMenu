@@ -1,0 +1,29 @@
+{% extends 'principal/index.html.twig' %}
+
+{% block content %}
+    <div class="contenido">
+        <div class="formulario">
+            {% if seccion.id %}
+                <h1>Modificar Sección</h1>
+            {% else %}
+                <h1>Crear nueva Sección</h1>
+            {% endif %}
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            {% if seccion.id is not null %}
+
+                <a href="{{ path('seccion_eliminar', {'id': seccion.id}) }}" class="btn btn-danger"> Eliminar
+                    sección</a>
+
+                <a href="{{ path('indexSec', {'sec': seccion.id}) }}" class="btn btn-info"> Volver al
+                    listado</a>
+            {% else %}
+                <a href="{{ path('index') }}" class="btn btn-info"> Volver al
+                    inicio</a>
+            {% endif %}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

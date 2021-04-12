@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\SeccionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,7 +30,7 @@ class Seccion
     private $icono;
 
     /**
-     * @ORM\OneToMany(targetEntity="Elemento", mappedBy="seccion")
+     * @ORM\OneToMany(targetEntity="Elemento", mappedBy="seccion", orphanRemoval=true)
      *
      */
     private $elementos;

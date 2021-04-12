@@ -1,5 +1,5 @@
 <ul type="none" class="displayFlex fondoSecciones overflow-auto">
-    {% for sec in seccion %}
+    {% for sec in secciones %}
         <div class="burbuja burbuja_fondo">
             <li>
                 <a class="relleno" href="{{ path('indexSec', {'sec': sec.id} ) }}">
@@ -18,7 +18,7 @@
     {# Restringir a usuarios con Rol de moderador #}
     <div class="burbuja burbuja_fondo_crear">
         <li>
-            <a class="relleno" {# href="{{ path('indexSec', {'sec': sec.id} ) }}" #} >
+            <a class="relleno" href="{{ path('seccion_nueva' ) }}">
                 <div>
                     <i class="fas fa-plus"></i>
                 </div>

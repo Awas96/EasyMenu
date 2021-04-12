@@ -4,6 +4,12 @@
     {% set sect = "¡Sección Vacía!" %}
 {% endif %}
 
+<div class="botonera">
+    <button class="btn btn-primary botonCrear"><i class="fa fa-plus"> Nuevo elemento</i></button>
+    <a class="btn btn-info botonCrear" href="{{ path('seccion_modificar', {'id': seccion}) }}"><i class="fa fa-edit">
+            Modificar Seccion</i></a>
+</div>
+
 <div class="fondoOpaco">
     <h2 class="text-center TituloGrande p-3">
         {% if elementos[0].seccion.icono is defined %}
@@ -84,9 +90,4 @@
         {% endfor %}
     </table>
 </div>
-<div class="botonera">
-    <button class="btn btn-primary botonCrear"><i class="fa fa-plus"> Nuevo elemento</i></button>
-    <button class="btn btn-info botonCrear"><i class="fa fa-edit"> Modificar Seccion</i></button>
-</div>
-
 
