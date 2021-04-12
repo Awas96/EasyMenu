@@ -15,5 +15,16 @@
             </li>
         </div>
     {% endfor %}
+    {# Restringir a usuarios con Rol de moderador #}
+    <div class="burbuja burbuja_fondo_crear">
+        <li>
+            <a class="relleno" {# href="{{ path('indexSec', {'sec': sec.id} ) }}" #} >
+                <div>
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div>Nueva Sección</div>
+            </a>
+        </li>
+    </div>
 </ul>
 
