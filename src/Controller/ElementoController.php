@@ -17,7 +17,7 @@ class ElementoController extends AbstractController
         $elemento = $elementoRepository->listarElementos($sec);
         return $this->render('elemento/listar.html.twig', [
             'controller_name' => 'ElementoController',
-            'elementos' => $elemento
+            'elementos' => $elemento,
         ]);
     }
 }

@@ -18,7 +18,7 @@ class PrincipalController extends AbstractController
         $secciones = $seccionRepository->findAll();
         return $this->render('principal/index.html.twig', [
             'controller_name' => 'PrincipalController',
-            'seccion' => $secciones
+            'secciones' => $secciones
         ]);
     }
     /**
@@ -30,7 +30,8 @@ class PrincipalController extends AbstractController
         $elemento = $elementoRepository->listarElementos($sec);
         return $this->render('principal/index.html.twig', [
             'controller_name' => 'PrincipalController',
-            'seccion' => $secciones,
+            'secciones' => $secciones,
+            'seccion' => $sec,
             'elementos' => $elemento
         ]);
     }
