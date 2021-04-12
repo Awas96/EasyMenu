@@ -5,8 +5,9 @@
 {% endif %}
 
 <div class="botonera">
-    <button class="btn btn-primary botonCrear"><i class="fa fa-plus"> Nuevo elemento</i></button>
-    <a class="btn btn-info botonCrear" href="{{ path('seccion_modificar', {'id': seccion}) }}"><i class="fa fa-edit">
+    <a class="btn btn-primary botonCrear" href="{{ path('elemento_nuevo', {'sec': nSeccion}) }}"><i class="fa fa-plus">
+            Nuevo elemento</i></a>
+    <a class="btn btn-info botonCrear" href="{{ path('seccion_modificar', {'id': nSeccion}) }}"><i class="fa fa-edit">
             Modificar Seccion</i></a>
 </div>
 
@@ -31,14 +32,14 @@
         <thead class="cabeceraTabla">
         <tr>
             <th class="
-                {% if sect == 'Tapas' %}
+                {% if 'Tapas' in sect %}
                     text-center
                 {% endif %}
                 ">
                 Nombre
             </th>
 
-            {% if sect != 'Tapas' %}
+            {% if 'Tapas' not in sect %}
                 <th>Precio</th>
             {% endif %}
         </tr>
@@ -47,13 +48,13 @@
             <tr class="filaTabla cursor">
                 <td class="paddingTupla displayFlex toggler flex-column">
                     <div class=" nombreTabla
-                    {% if sect == 'Tapas' %} align-self-center
+                    {% if 'Tapas' in sect %} align-self-center
                     {% endif %}">
                         <span>·&nbsp{{ i.nombre }}</span>
                     </div>
 
                 </td>
-                {% if sect != 'Tapas' %}
+                {% if 'Tapas' not in sect %}
                     <td class="tuplaPrecio">
                         <span>
                             {% if i.precio < 10 %}
@@ -65,7 +66,8 @@
                     </td>
                 {% endif %}
                 <td>
-                    <button class="btn btn-outline-dark botonEdit"><i class="fas fa-edit"></i></button>
+                    <a class="btn btn-outline-dark botonEdit" href="{{ path('elemento_modificar', {'id': i.id}) }}"><i
+                                class="fas fa-edit"></i></a>
                 </td>
             </tr>
             <tr>
