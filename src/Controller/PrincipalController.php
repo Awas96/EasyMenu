@@ -31,7 +31,7 @@ class PrincipalController extends AbstractController
         return $this->render('principal/index.html.twig', [
             'controller_name' => 'PrincipalController',
             'secciones' => $secciones,
-            'seccion' => $sec,
+            'nSeccion' => $sec,
             'elementos' => $elemento
         ]);
     }
