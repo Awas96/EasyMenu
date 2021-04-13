@@ -1,23 +1,27 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cabecera.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     {% block estilos %} {% endblock %}
 {% endblock %}
 {% block body %}
 
-    <nav class="navbar navbar-expand-lg navbar-dark pt-3 pb-3 flex justify-content-between colorCabecera">
-        <div class="displayFlex cabecera">
-            <img class="headerImage" src="{{ asset('img/logo.png') }}">
-            <div class="font-weight-bolder align-self-center text-center">
-                <h1 class="TituloGrande"> CLUB 79 </h1>
-                <h1 class="TituloPequenio"> Restaurante Antonio Díaz Franco </h1>
+    <nav class="header_color">
+        <div class="display_flex header">
+            <img class="header_image" src="{{ asset('img/logo.png') }}">
+            <div class="header_texto">
+                <h1 class="font-weight-bolder texto_mas_grande"> CLUB-79 </h1>
+                <h2 class="texto_cursivo texto_grande"> Restaurante Antonio Díaz Franco </h2>
             </div>
         </div>
     </nav>
     <div class="contenido">
         {% block content %}{% endblock content %}
-        <footer class="footer colorCabecera p-4 ">
-            <h6 class="displayFlex justify-content-around"><span>Jose Antonio Roselló Lopez</span><span
+        <footer class="footer header_color p-4 ">
+            <h6 class="display_flex justify-content-around"><span>Jose Antonio Roselló Lopez</span><span
                         class="fw-bolder">©IMS Gamarra Linares 2021</span>
             </h6>
         </footer>

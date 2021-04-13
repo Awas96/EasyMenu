@@ -1,16 +1,19 @@
-<ul type="none" class="displayFlex fondoSecciones overflow-auto">
+<ul type="none" class="display_flex secciones_fondo secciones_overflow">
+
     {% for sec in secciones %}
         <div class="burbuja burbuja_fondo">
             <li>
-                <a class="relleno" href="{{ path('indexSec', {'sec': sec.id} ) }}">
+                <a class="buruja_relleno" href="{{ path('indexSec', {'sec': sec.id} ) }}">
                     <div>
+                        <span class="burbuja_icono">
                         {% if sec.icono %}
                             <i class="fas {{ sec.icono }}"></i>
                         {% else %}
                             <i class="fas fa-utensils"></i>
                         {% endif %}
+                        </span>
                     </div>
-                    <div>{{ sec.nombre }}</div>
+                    <div class="burbuja_texto"><span>{{ sec.nombre }}</span></div>
                 </a>
             </li>
         </div>
@@ -19,10 +22,11 @@
     <div class="burbuja burbuja_fondo_crear">
         <li>
             <a class="relleno" href="{{ path('seccion_nueva' ) }}">
-                <div>
+                <div><span class="burbuja_icono">
                     <i class="fas fa-plus"></i>
+                    </span>
                 </div>
-                <div>Nueva Sección</div>
+                <div class="burbuja_texto"><span>Nueva Sección</span></div>
             </a>
         </li>
     </div>

@@ -1,27 +1,29 @@
 {% extends 'principal/index.html.twig' %}
-
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/formulario.css') }}"/>
+{% endblock %}
 {% block content %}
     <div class="contenido">
-        <div class="formulario">
-            {% if elemento.id %}
-                <h1>Modificar Elemento</h1>
-            {% else %}
-                <h1>Crear nuevo Elemento</h1>
-            {% endif %}
-
+        <div class="formulario texto_grande ">
+            <div class="formulario_titulo texto_grande">
+                {% if elemento.id %}
+                    <h1 class="texto_grueso">Modificar Elemento</h1>
+                {% else %}
+                    <h1 class="texto_grueso">Crear nuevo Elemento</h1>
+                {% endif %}
+            </div>
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i></button>
             {% if elemento.id is not null %}
 
                 <a href="{{ path('elemento_eliminar', {'id': elemento.id, 'sec': elemento.seccion.id}) }}"
-                   class="btn btn-danger"> Eliminar
-                    elemento</a>
+                   class="btn btn-danger"><i class="fas fa-trash-alt"></i> </a>
 
 
             {% endif %}
-            <a href="{{ path('indexSec', {'sec': elemento.seccion.id}) }}" class="btn btn-info"> Volver al
-                listado</a>
+            <a href="{{ path('indexSec', {'sec': elemento.seccion.id}) }}" class="btn btn-info"><i
+                        class="fas fa-arrow-left"></i></a>
             {{ form_end(form) }}
         </div>
     </div>

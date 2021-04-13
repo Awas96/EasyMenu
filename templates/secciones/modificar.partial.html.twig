@@ -1,5 +1,7 @@
 {% extends 'principal/index.html.twig' %}
-
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/formulario.css') }}"/>
+{% endblock %}
 {% block content %}
     <div class="contenido">
         <div class="formulario">
@@ -11,17 +13,16 @@
 
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i></button>
             {% if seccion.id is not null %}
 
-                <a href="{{ path('seccion_eliminar', {'id': seccion.id}) }}" class="btn btn-danger"> Eliminar
-                    sección</a>
+                <a href="{{ path('seccion_eliminar', {'id': seccion.id}) }}" class="btn btn-danger"> <i
+                            class="fas fa-trash-alt"></i></a>
 
-                <a href="{{ path('indexSec', {'sec': seccion.id}) }}" class="btn btn-info"> Volver al
-                    listado</a>
+                <a href="{{ path('indexSec', {'sec': seccion.id}) }}" class="btn btn-info"><i
+                            class="fas fa-arrow-left"></i></a>
             {% else %}
-                <a href="{{ path('index') }}" class="btn btn-info"> Volver al
-                    inicio</a>
+                <a href="{{ path('index') }}" class="btn btn-info"><i class="fas fa-arrow-left"></i></a>
             {% endif %}
             {{ form_end(form) }}
         </div>

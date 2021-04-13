@@ -8,16 +8,31 @@ function toggle() {
         let elemento = $(this);
         let trSpoiler = $('.spoiler')[index];
         elemento.parent().click(function () {
-            //Por el funcionamiento de symfony, hay que disponer de los elementos viuales
-            //de tal manera que haya que esconder al padre y al elemento para mostrarlo.
-            if ($(trSpoiler))
-                if ($(trSpoiler).is(':visible')) {
-                    $(trSpoiler).parent().hide(600);
-                    $(trSpoiler).hide(600);
-                } else {
-                    $(trSpoiler).parent().show(600);
-                    $(trSpoiler).show(1000);
-                }
+            mover(trSpoiler);
+            girar(this.querySelector("i"));
         })
     });
 }
+
+function mover(trSpoiler) {
+    //Por el funcionamiento de symfony, hay que disponer de los elementos viuales
+    //de tal manera que haya que esconder al padre y al elemento para mostrarlo.
+    if ($(trSpoiler).is(':visible')) {
+        $(trSpoiler).parent().hide(600);
+        $(trSpoiler).hide(600);
+    } else {
+        $(trSpoiler).parent().show(600);
+        $(trSpoiler).show(600);
+    }
+}
+
+function girar(icono) {
+    $(icono).toggleClass(function () {
+        if ($(this).is(".cerrado")) {
+            return "abierto";
+        } else {
+            return "cerrado";
+        }
+    })
+}
+

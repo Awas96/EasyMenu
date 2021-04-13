@@ -1,10 +1,8 @@
 .tabla {
-    font-size: 1.2em;
     width: 100%;
 }
 
 .tabla_cabecera {
-    font-size: 1.2em;
     padding: 1em;
 }
 
@@ -14,10 +12,14 @@
     padding-right: 1em;
 }
 
-
 .tabla_fila {
-    width: 95%;
-    max-width: 95%;
+    width: 100%;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+
+}
+
+.tabla_fila:last-child {
+    border-bottom: 0px solid white;
 }
 
 .tupla_precio {
@@ -25,32 +27,36 @@
     vertical-align: bottom;
 }
 
-.tupla_relleno {
-    padding: 1em;
-}
 
 .tabla_fondo {
     background-color: rgba(100, 100, 100, 0.2);
     border-radius: 5px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     margin: 1.5em;
-
 }
 
 .tabla_nombre {
     border-top: 5px solid rgba(0, 0, 0, 0);
     border: 5px solid rgba(0, 0, 0, 0);
-
 }
 
 /* parte escondida de las tablas */
 
 .spoiler {
-    margin-left: 1em;
-    margin-right: 1em;
+    width: 95%;
 }
 
 .spoiler_descripcion {
-    font-size: 0.8em;
+    margin-bottom: 1em;
+}
+
+.spoiler_imagenes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 .spoiler_figure {
@@ -73,17 +79,16 @@
 /* botones para el final de la tabla  */
 
 .botones {
-    margin-left: 2.5vw;
+    margin-left: 1.5em;
     border-radius: 10px;
-
 }
 
-.boton_editar {
+.cerrado {
+    transition: transform 400ms ease-in-out;
 }
 
-.boton_crear {
-
-
+.abierto {
+    transform: rotate(180deg);
+    transition: transform 400ms ease-in-out;
 }
-
 

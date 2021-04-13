@@ -1,13 +1,17 @@
 {% extends 'layout.html.twig' %}
 
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/tabla.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/burbujas.css') }}">
+{% endblock %}
+
+
 {% block title %}Carta{% endblock %}
 
 {% block content %}
-    <div class="imagenFondo">
-        {% if secciones %}
-            {% include  'secciones/secciones_listar.partial.html.twig' %}
-            <hr>
-        {% endif %}
+    <div class="fondo_imagen">
+        {% include  'secciones/secciones_listar.partial.html.twig' %}
+        <hr>
         {% if elementos is defined %}
             {% include 'elemento/elementos_listar.partial.html.twig' %}
         {% endif %}
@@ -17,7 +21,4 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/toggler.js') }}"></script> {# Utilizado para mostrar o esconder elementos quitando o poniendo clases #}
-{% endblock %}
-{% block estilos %}
-    <link rel="stylesheet" href="{{ asset('css/burbujas.css') }}">
 {% endblock %}

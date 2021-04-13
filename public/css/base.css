@@ -1,4 +1,8 @@
 /*Clases para el contenido de la web*/
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 .fondo_imagen {
     background-image: url(../img/bgimage.jpg);
     height: 100%;
@@ -34,4 +38,24 @@
 
 .texto_cursivo {
     font-style: italic;
+}
+
+.texto_grueso {
+    font-weight: bold;
+}
+
+.texto_pequenio {
+    font-size: 0.5em;
+}
+
+.texto_mas_pequenio {
+    font-size: 0.3em;
+}
+
+.texto_grande {
+    font-size: 1.3em;
+}
+
+.texto_mas_grande {
+    font-size: 1.7em;
 }

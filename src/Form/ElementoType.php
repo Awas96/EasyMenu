@@ -16,7 +16,9 @@ class ElementoType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('precio', MoneyType::Class)
+            ->add('precio', MoneyType::Class, [
+                'required' => false
+            ])
             ->add('descripcion')
             ->add('alergenos', EntityType::class, [
                 'class' => Alergeno::class,

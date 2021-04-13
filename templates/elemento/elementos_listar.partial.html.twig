@@ -4,15 +4,15 @@
     {% set sect = "¡Sección Vacía!" %}
 {% endif %}
 
-<div class="botonera">
-    <a class="btn btn-primary botonCrear" href="{{ path('elemento_nuevo', {'sec': nSeccion}) }}"><i class="fa fa-plus">
+<div class="botones">
+    <a class="btn btn-primary boton_crear" href="{{ path('elemento_nuevo', {'sec': nSeccion}) }}"><i class="fa fa-plus">
             Nuevo elemento</i></a>
     <a class="btn btn-info botonCrear" href="{{ path('seccion_modificar', {'id': nSeccion}) }}"><i class="fa fa-edit">
             Modificar Seccion</i></a>
 </div>
 
-<div class="fondoOpaco">
-    <h2 class="text-center TituloGrande p-3">
+<div class="tabla_fondo">
+    <h2 class="text-center texto_mas_grande p-3">
         {% if elementos[0].seccion.icono is defined %}
             {% if elementos[0].seccion.icono is not null %}
                 <i class="fas {{ elementos[0].seccion.icono }}"></i>
@@ -21,15 +21,14 @@
             {% endif %}
         {% endif %}
         <div>
-            {{ sect }}
+            <span class="texto_grande">{{ sect }}</span>
         </div>
-
     </h2>
 </div>
 <hr>
-<div class="tablaOrden fondoOpaco">
-    <table class="table letraGrande">
-        <thead class="cabeceraTabla">
+<div class="tabla_orden tabla_fondo">
+    <table class="table tabla table-borderless table-hover ">
+        <thead class="tabla_cabecera">
         <tr>
             <th class="
                 {% if 'Tapas' in sect %}
@@ -45,17 +44,17 @@
         </tr>
         </thead>
         {% for i in elementos %}
-            <tr class="filaTabla cursor">
-                <td class="paddingTupla displayFlex toggler flex-column">
-                    <div class=" nombreTabla
-                    {% if 'Tapas' in sect %} align-self-center
+            <tr class="tabla_fila cursor">
+                <td class=" toggler texto_mas_grande">
+                    <div class="
+                    {% if 'Tapas' in sect %} text-center
                     {% endif %}">
-                        <span>·&nbsp{{ i.nombre }}</span>
+                        <span> <i class="fas fa-caret-down cerrado"></i>&nbsp{{ i.nombre }}</span>
                     </div>
 
                 </td>
                 {% if 'Tapas' not in sect %}
-                    <td class="tuplaPrecio">
+                    <td class="tupla_precio texto_grande">
                         <span>
                             {% if i.precio < 10 %}
                                 &nbsp
@@ -65,19 +64,20 @@
 
                     </td>
                 {% endif %}
-                <td>
-                    <a class="btn btn-outline-dark botonEdit" href="{{ path('elemento_modificar', {'id': i.id}) }}"><i
+                <td hidden>
+                    <a class="btn btn-outline-dark boton_editar"
+                       href="{{ path('elemento_modificar', {'id': i.id}) }}"><i
                                 class="fas fa-edit"></i></a>
                 </td>
             </tr>
-            <tr>
-                <td colspan="2" style="display: none">
+            <tr class="tabla_fila">
+                <td colspan="3" class="w-100" style="display: none">
                     <div class="spoiler" style="display: none">
-                        <div class="descripcion">{{ i.descripcion }}</div>
-                        <div class="displayFlex flex-wrap justify-content-around">
+                        <div class="spoiler_descripcion">{{ i.descripcion }}</div>
+                        <div class="spoiler_imagenes">
                             {% for a in i.alergenos %}
                                 <div>
-                                    <figure class="displayFlex figurspoiler">
+                                    <figure class="display_flex spoiler_figure">
                                         <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}"
                                              title="{{ a.nombre }}"
                                              alt="{{ a.nombre }}">
