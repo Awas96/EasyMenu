@@ -1,0 +1,37 @@
+/*Clases para el contenido de la web*/
+.fondo_imagen {
+    background-image: url(../img/bgimage.jpg);
+    height: 100%;
+    min-height: 100vh;
+    background-position: center;
+    background-size: cover;
+    padding-bottom: 1em;
+}
+
+.contenido {
+    height: 100%;
+    min-height: 100vh;
+}
+
+
+/* Clases para funcionalidad  */
+
+.debug {
+    border: 1px solid black;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.display_flex {
+    display: flex;
+}
+
+.texto_ligero {
+    font-weight: lighter;
+}
+
+.texto_cursivo {
+    font-style: italic;
+}

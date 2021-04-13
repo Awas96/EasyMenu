@@ -1,0 +1,89 @@
+.tabla {
+    font-size: 1.2em;
+    width: 100%;
+}
+
+.tabla_cabecera {
+    font-size: 1.2em;
+    padding: 1em;
+}
+
+.tabla_orden {
+    text-align: left;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+
+.tabla_fila {
+    width: 95%;
+    max-width: 95%;
+}
+
+.tupla_precio {
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.tupla_relleno {
+    padding: 1em;
+}
+
+.tabla_fondo {
+    background-color: rgba(100, 100, 100, 0.2);
+    border-radius: 5px;
+    margin: 1.5em;
+
+}
+
+.tabla_nombre {
+    border-top: 5px solid rgba(0, 0, 0, 0);
+    border: 5px solid rgba(0, 0, 0, 0);
+
+}
+
+/* parte escondida de las tablas */
+
+.spoiler {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.spoiler_descripcion {
+    font-size: 0.8em;
+}
+
+.spoiler_figure {
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.3em;
+}
+
+.spoiler_figure img {
+    display: flex;
+    align-self: center;
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.spoiler_figure figcaption {
+    align-self: center;
+}
+
+/* botones para el final de la tabla  */
+
+.botones {
+    margin-left: 2.5vw;
+    border-radius: 10px;
+
+}
+
+.boton_editar {
+}
+
+.boton_crear {
+
+
+}
+
+

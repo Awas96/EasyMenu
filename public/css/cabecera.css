@@ -1,0 +1,26 @@
+/* Clases para el header */
+
+.header {
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.header_color {
+    background-color: rgba(5, 21, 1, 0.9);
+    color: #ab9659;
+}
+
+.header_image {
+    width: 6rem;
+    height: 6rem;
+    margin: 0.5em;
+}
+
+.header_texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
