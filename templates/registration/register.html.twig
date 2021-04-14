@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Registro{% endblock %}
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/formulario.css') }}"/>
+{% endblock %}
+{% block content %}
+    <div class="contenido">
+        <div class="formulario texto_grande ">
+            {% for flashError in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+            {% endfor %}
+            <div class="formulario_titulo">
+                <h1>Register</h1>
+            </div>
+
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.username) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Contraseña'
+            }) }}
+            <button type="submit" class="btn">Register</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+{% endblock %}

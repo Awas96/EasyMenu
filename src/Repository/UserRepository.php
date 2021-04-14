@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,16 +15,12 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository
+class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
-
-    // /**
-    //  * @return Usuario[] Returns an array of Usuario objects
-    //  */
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
@@ -29,7 +28,7 @@ class UserRepository extends ServiceEntityRepository
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
         if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', get_class($user)));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 
         $user->setPassword($newEncodedPassword);
@@ -37,25 +36,31 @@ class UserRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
-    public function buscarPorId($id): User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
-
-
+    // /**
+    //  * @return User[] Returns an array of User objects
+    //  */
     /*
-    public function findOneBySomeField($value): ?Usuario
+    public function findByExampleField($value)
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')
             ->setParameter('val', $value)
+            ->orderBy('u.id', 'ASC')
+            ->setMaxResults(10)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
     */
+
+
+    public function findOneByUsername($valor): ?User
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.username = :val')
+            ->setParameter('val', $valor)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 }
