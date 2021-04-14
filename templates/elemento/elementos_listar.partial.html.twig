@@ -4,13 +4,14 @@
     {% set sect = "¡Sección Vacía!" %}
 {% endif %}
 
+{% if is_granted('ROLE_MODERADOR') %}
 <div class="botones">
     <a class="btn btn-primary boton_crear" href="{{ path('elemento_nuevo', {'sec': nSeccion}) }}"><i class="fa fa-plus">
             Nuevo elemento</i></a>
     <a class="btn btn-info botonCrear" href="{{ path('seccion_modificar', {'id': nSeccion}) }}"><i class="fa fa-edit">
             Modificar Seccion</i></a>
 </div>
-
+{% endif %}
 <div class="tabla_fondo">
     <h2 class="text-center texto_mas_grande p-3">
         {% if elementos[0].seccion.icono is defined %}
@@ -64,11 +65,13 @@
 
                     </td>
                 {% endif %}
-                <td hidden>
-                    <a class="btn btn-outline-dark boton_editar"
-                       href="{{ path('elemento_modificar', {'id': i.id}) }}"><i
-                                class="fas fa-edit"></i></a>
-                </td>
+                {% if is_granted('ROLE_MODERADOR') %}
+                    <td>
+                        <a class="btn btn-outline-dark boton_editar"
+                           href="{{ path('elemento_modificar', {'id': i.id}) }}"><i
+                                    class="fas fa-edit"></i></a>
+                    </td>
+                {% endif %}
             </tr>
             <tr class="tabla_fila">
                 <td colspan="3" class="w-100" style="display: none">

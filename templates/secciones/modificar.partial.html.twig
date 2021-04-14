@@ -12,7 +12,8 @@
                     <h1>Crear nueva Sección</h1>
                 {% endif %}
             </div>
-            {{ form_start(form) }}
+        </div>
+        {{ form_start(form) }}
             {{ form_widget(form) }}
             <button type="submit" class="btn btn-success"><i class="fas fa-save"></i></button>
             {% if seccion.id is not null %}

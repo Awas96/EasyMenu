@@ -19,16 +19,18 @@
         </div>
     {% endfor %}
     {# Restringir a usuarios con Rol de moderador #}
-    <div class="burbuja burbuja_fondo_crear">
-        <li>
-            <a class="relleno" href="{{ path('seccion_nueva' ) }}">
-                <div><span class="burbuja_icono">
+    {% if is_granted('ROLE_MODERADOR') %}
+        <div class="burbuja burbuja_fondo_crear">
+            <li>
+                <a class="relleno" href="{{ path('seccion_nueva' ) }}">
+                    <div><span class="burbuja_icono">
                     <i class="fas fa-plus"></i>
                     </span>
-                </div>
-                <div class="burbuja_texto"><span>Nueva Sección</span></div>
-            </a>
-        </li>
-    </div>
+                    </div>
+                    <div class="burbuja_texto"><span>Nueva Sección</span></div>
+                </a>
+            </li>
+        </div>
+    {% endif %}
 </ul>
 

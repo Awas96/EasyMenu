@@ -22,7 +22,7 @@ class PrincipalController extends AbstractController
         ]);
     }
     /**
-     * @Route("/{sec}", name="indexSec")
+     * @Route("/carta/{sec}", name="indexSec")
      */
     public function indexConSeccion(SeccionRepository $seccionRepository, ElementoRepository $elementoRepository, $sec): Response
     {

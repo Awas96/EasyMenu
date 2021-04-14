@@ -11,7 +11,9 @@
 
     <nav class="header_color">
         <div class="display_flex header">
-            <img class="header_image" src="{{ asset('img/logo.png') }}">
+            <a href="{{ path('index') }}">
+                <img class="header_image" src="{{ asset('img/logo.png') }}">
+            </a>
             <div class="header_texto">
                 <h1 class="font-weight-bolder texto_mas_grande"> CLUB-79 </h1>
                 <h2 class="texto_cursivo texto_grande"> Restaurante Antonio Díaz Franco </h2>
@@ -20,13 +22,17 @@
     </nav>
     <div class="contenido">
         {% block content %}{% endblock content %}
-        <footer class="footer header_color p-4 ">
-            <h6 class="display_flex justify-content-around"><span>Jose Antonio Roselló Lopez</span><span
-                        class="fw-bolder">©IMS Gamarra Linares 2021</span>
-            </h6>
+        <footer class="header_color p-4 ">
+            <div class="display_flex justify-content-around">
+                <span>Jose Antonio Roselló Lopez</span>
+                <span class="fw-bolder">©IMS Gamarra Linares 2021
+                    {% if not app.user %}
+                        <a class="limpar_formato letra_dorada" href="{{ path('app_login') }}">;)</a>
+                    {% else %}
+                        <a class="limpar_formato letra_dorada" href="{{ path('app_logout') }}">;(</a>
+                    {% endif %}
+                </span>
+            </div>
         </footer>
     </div>
-
-
-
 {% endblock body %}
