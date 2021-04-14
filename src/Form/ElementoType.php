@@ -23,7 +23,7 @@ class ElementoType extends AbstractType
             ->add('alergenos', EntityType::class, [
                 'class' => Alergeno::class,
                 'choice_label' => 'nombre',
-                'label' => 'Alergenos que tiene este artículo',
+                'label' => 'Alérgenos que tiene este artículo',
                 'expanded' => true,
                 'multiple' => true
 
