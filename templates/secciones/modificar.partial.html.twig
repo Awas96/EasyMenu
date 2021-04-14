@@ -4,13 +4,14 @@
 {% endblock %}
 {% block content %}
     <div class="contenido">
-        <div class="formulario">
-            {% if seccion.id %}
-                <h1>Modificar Sección</h1>
-            {% else %}
-                <h1>Crear nueva Sección</h1>
-            {% endif %}
-
+        <div class="formulario texto_grande ">
+            <div class="formulario_titulo texto_grande">
+                {% if seccion.id %}
+                    <h1>Modificar Sección</h1>
+                {% else %}
+                    <h1>Crear nueva Sección</h1>
+                {% endif %}
+            </div>
             {{ form_start(form) }}
             {{ form_widget(form) }}
             <button type="submit" class="btn btn-success"><i class="fas fa-save"></i></button>
@@ -25,6 +26,7 @@
                 <a href="{{ path('index') }}" class="btn btn-info"><i class="fas fa-arrow-left"></i></a>
             {% endif %}
             {{ form_end(form) }}
+
         </div>
     </div>
 {% endblock %}

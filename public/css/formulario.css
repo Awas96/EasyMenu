@@ -12,3 +12,32 @@
     padding-bottom: 1em;
 }
 
+#elemento_alergenos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
+    height: 10em;
+    border: 1px solid lightgray;
+    padding: 0.3em;
+    border-radius: 7px;
+}
+
+.form-check {
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+}
+
+.form-check-input {
+
+    -ms-transform: scale(1.5); /* IE */
+    -moz-transform: scale(1.5); /* FF */
+    -o-transform: scale(1.5); /* Opera */
+    transform: scale(1.5);
+    padding: 0.3em;
+    margin-bottom: 0.3em;
+}
+
+.form-check-label {
+    align-self: baseline;
+}
