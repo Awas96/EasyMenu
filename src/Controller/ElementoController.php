@@ -34,21 +34,21 @@ class ElementoController extends AbstractController
 
         if (null == $elemento) {
             $elemento = new Elemento();
+            $elemento->setVisible(true);
             $elemento->setSeccion($seccionRepository->findById($sec));
             $this->getDoctrine()->getManager()->persist($elemento);
         } else {
             $sec = $seccionRepository->findById($elemento->getSeccion())->getId();
-
         }
-        $form = $this->createForm(ElementoType::class, $elemento);
 
+        $form = $this->createForm(ElementoType::class, $elemento);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('indexSec', [
+            /*return $this->redirectToRoute('indexSec', [
                 'sec' => $sec
-            ]);
+            ]);*/
         }
 
         return $this->render('elemento/modificar.partial.html.twig', [

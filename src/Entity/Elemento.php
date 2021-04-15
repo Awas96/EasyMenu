@@ -30,6 +30,7 @@ class Elemento
      */
     private $precio;
 
+
     /**
      * @ORM\ManyToOne(targetEntity="Seccion", inversedBy="elementos")
      * @ORM\JoinColumn(nullable=false)
@@ -43,9 +44,15 @@ class Elemento
     private $alergenos;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $visible;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $descripcion;
+
 
     public function __construct()
     {
@@ -118,7 +125,6 @@ class Elemento
     public function removeAlergeno(Alergeno $alergeno): self
     {
         $this->alergenos->removeElement($alergeno);
-
         return $this;
     }
 
@@ -130,6 +136,18 @@ class Elemento
     public function setDescripcion(?string $descripcion): self
     {
         $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(bool $visible): self
+    {
+        $this->visible = $visible;
 
         return $this;
     }
