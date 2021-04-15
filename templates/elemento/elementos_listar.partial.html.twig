@@ -5,12 +5,14 @@
 {% endif %}
 
 {% if is_granted('ROLE_MODERADOR') %}
-<div class="botones">
-    <a class="btn btn-primary boton_crear" href="{{ path('elemento_nuevo', {'sec': nSeccion}) }}"><i class="fa fa-plus">
-            Nuevo elemento</i></a>
-    <a class="btn btn-info botonCrear" href="{{ path('seccion_modificar', {'id': nSeccion}) }}"><i class="fa fa-edit">
-            Modificar Seccion</i></a>
-</div>
+    <div class="botones">
+        <a class="btn btn-primary boton_crear" href="{{ path('elemento_nuevo', {'sec': nSeccion}) }}"><i
+                    class="fa fa-plus">
+                Nuevo elemento</i></a>
+        <a class="btn btn-info botonCrear" href="{{ path('seccion_modificar', {'id': nSeccion}) }}"><i
+                    class="fa fa-edit">
+                Modificar Seccion</i></a>
+    </div>
 {% endif %}
 <div class="tabla_fondo">
     <h2 class="text-center texto_mas_grande p-3">
@@ -46,7 +48,11 @@
         </thead>
         {% for i in elementos %}
             <tr class="tabla_fila cursor">
+                {% if i.alergenos|length > 0 or i.descripcion is not empty %}
                 <td class=" toggler texto_mas_grande">
+            {% else %}
+                <td class="  texto_mas_grande">
+                    {% endif %}
                     <div class="
                     {% if 'Tapas' in sect %} text-center
                     {% endif %}">
