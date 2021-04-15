@@ -62,12 +62,16 @@ body {
     font-size: 0.5em;
 }
 
+.texto_normal {
+    font-size: 1em;
+}
+
 .texto_grande {
-    font-size: 1.3em;
+    font-size: 1.7em;
 }
 
 .texto_mas_grande {
-    font-size: 1.7em;
+    font-size: 2em;
 }
 
 .margen_abajo {

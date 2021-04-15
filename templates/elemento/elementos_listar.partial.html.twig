@@ -30,7 +30,7 @@
 </div>
 <hr>
 <div class="tabla_orden tabla_fondo">
-    <table class="table tabla table-borderless table-hover ">
+    <table class="tabla table-borderless table-hover ">
         <thead class="tabla_cabecera">
         <tr>
             <th class="
@@ -49,9 +49,9 @@
         {% for i in elementos %}
             <tr class="tabla_fila cursor">
                 {% if i.alergenos|length > 0 or i.descripcion is not empty %}
-                <td class=" toggler texto_mas_grande">
+                <td class=" toggler texto_grande">
             {% else %}
-                <td class="  texto_mas_grande">
+                <td class="texto_grande">
                     {% endif %}
                     <div class="
                     {% if 'Tapas' in sect %} text-center
