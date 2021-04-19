@@ -46,4 +46,13 @@ class ElementoRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function GetElementByID($id)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 }

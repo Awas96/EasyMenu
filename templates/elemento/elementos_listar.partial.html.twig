@@ -47,21 +47,22 @@
         </tr>
         </thead>
         {% for i in elementos %}
-            <tr class="tabla_fila cursor">
-                {% if i.alergenos|length > 0 or i.descripcion is not empty %}
-                <td class=" toggler texto_grande">
-            {% else %}
-                <td class="texto_grande">
-                    {% endif %}
-                    <div class="
+            {% if i.visible or is_granted('ROLE_MODERADOR') %}
+                <tr class="tabla_fila cursor {% if not i.visible %} texto_opaco {% endif %}">
+                    {% if i.alergenos|length > 0 or i.descripcion is not empty %}
+                    <td class=" toggler texto_grande">
+                {% else %}
+                    <td class="texto_grande">
+                        {% endif %}
+                        <div class="
                     {% if 'Tapas' in sect %} text-center
                     {% endif %}">
-                        <span> <i class="fas fa-caret-down cerrado"></i>&nbsp{{ i.nombre }}</span>
-                    </div>
+                            <span> <i class="fas fa-caret-down cerrado"></i>&nbsp{{ i.nombre }}</span>
+                        </div>
 
-                </td>
-                {% if 'Tapas' not in sect %}
-                    <td class="tupla_precio texto_grande">
+                    </td>
+                    {% if 'Tapas' not in sect %}
+                        <td class="tupla_precio texto_grande">
                         <span>
                             {% if i.precio < 10 %}
                                 &nbsp
@@ -69,35 +70,43 @@
                             {{ i.precio }}&nbsp€
                         </span>
 
-                    </td>
-                {% endif %}
-                {% if is_granted('ROLE_MODERADOR') %}
-                    <td>
-                        <a class="btn btn-outline-dark boton_editar"
-                           href="{{ path('elemento_modificar', {'id': i.id}) }}"><i
-                                    class="fas fa-edit"></i></a>
-                    </td>
-                {% endif %}
-            </tr>
-            <tr class="">
-                <td colspan="3" class="w-100" style="display: none">
-                    <div class="spoiler" style="display: none">
-                        <div class="spoiler_descripcion">{{ i.descripcion }}</div>
-                        <div class="spoiler_imagenes">
-                            {% for a in i.alergenos %}
-                                <div>
-                                    <figure class="display_flex spoiler_figure">
-                                        <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}"
-                                             title="{{ a.nombre }}"
-                                             alt="{{ a.nombre }}">
-                                        <figcaption>{{ a.descripcion }}</figcaption>
-                                    </figure>
-                                </div>
-                            {% endfor %}
+                        </td>
+                    {% endif %}
+                    {% if is_granted('ROLE_MODERADOR') %}
+                        <td>
+                            <a class="btn btn-outline-dark boton_editar"
+                               href="{{ path('elemento_modificar', {'id': i.id}) }}"><i
+                                        class="fas fa-edit"></i></a>
+                            <a class="btn btn-outline-dark boton_editar"
+                               href="{{ path('elemento_ocultar', {'id': i.id, 'sec': i.seccion.id}) }}">
+                                {% if i.visible %}
+                                <i class="fas fa-eye-slash"></i></a>
+                            {% else %}
+                                <i class="fas fa-eye"></i></a>
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+                <tr class="">
+                    <td colspan="3" class="w-100" style="display: none">
+                        <div class="spoiler" style="display: none">
+                            <div class="spoiler_descripcion">{{ i.descripcion }}</div>
+                            <div class="spoiler_imagenes">
+                                {% for a in i.alergenos %}
+                                    <div>
+                                        <figure class="display_flex spoiler_figure">
+                                            <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}"
+                                                 title="{{ a.nombre }}"
+                                                 alt="{{ a.nombre }}">
+                                            <figcaption>{{ a.descripcion }}</figcaption>
+                                        </figure>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            {% endif %}
         {% endfor %}
     </table>
 </div>

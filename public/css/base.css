@@ -70,6 +70,10 @@ body {
     font-size: 1.7em;
 }
 
+.texto_opaco {
+    color: rgba(0, 0, 0, 0.5);
+}
+
 .texto_mas_grande {
     font-size: 2em;
 }

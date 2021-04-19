@@ -76,5 +76,24 @@ class ElementoController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/elemento/ocultar/{id}", name="elemento_ocultar")
+     */
+    public function OcultarElemento(Elemento $elemento, ElementoRepository $elementoRepository, $id): Response
+    {
+        $sec = $_GET["sec"];
+        $elemento = $elementoRepository->GetElementByID($id);
+        $estado = $elemento->getVisible();
+        if ($estado) {
+            $elemento->setVisible(false);
+        } else {
+            $elemento->setVisible(true);
+        }
+        $this->getDoctrine()->getManager()->flush();
+        dump($elemento);
+        return $this->redirectToRoute('indexSec', [
+            'sec' => $sec
+        ]);
+    }
 
 }
