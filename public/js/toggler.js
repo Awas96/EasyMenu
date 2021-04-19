@@ -19,10 +19,10 @@ function mover(trSpoiler) {
     //de tal manera que haya que esconder al padre y al elemento para mostrarlo.
     if ($(trSpoiler).is(':visible')) {
         $(trSpoiler).parent().hide(600);
-        $(trSpoiler).hide(600);
+        $(trSpoiler).hide(200);
     } else {
         $(trSpoiler).parent().show(600);
-        $(trSpoiler).show(600);
+        $(trSpoiler).show(300);
     }
 }
 
