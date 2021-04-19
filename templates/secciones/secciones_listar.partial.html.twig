@@ -1,10 +1,22 @@
 <ul type="none" class="display_flex secciones_fondo secciones_overflow">
 
     {% for sec in secciones %}
-        <div class="burbuja burbuja_fondo">
-            <li>
-                <a class="buruja_relleno" href="{{ path('indexSec', {'sec': sec.id} ) }}">
-                    <div>
+
+        {% set vacio = true %}
+        {% for elemento in sec.elementos %}
+            {% if vacio %}
+                {% if elemento.visible %}
+                    {% set vacio = false %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if not vacio or is_granted('ROLE_MODERADOR') %}
+            <div class="burbuja burbuja_fondo">
+                <li>
+                    <a class="buruja_relleno " href="{{ path('indexSec', {'sec': sec.id} ) }}">
+                        <div {% if vacio %} class="texto_opaco" {% endif %}>
+                            <div>
                         <span class="burbuja_icono">
                         {% if sec.icono %}
                             <i class="fas {{ sec.icono }}"></i>
@@ -12,11 +24,13 @@
                             <i class="fas fa-utensils"></i>
                         {% endif %}
                         </span>
-                    </div>
-                    <div class="burbuja_texto"><span>{{ sec.nombre }}</span></div>
-                </a>
-            </li>
-        </div>
+                            </div>
+                            <div class="burbuja_texto"><span>{{ sec.nombre }}</span></div>
+                        </div>
+                    </a>
+                </li>
+            </div>
+        {% endif %}
     {% endfor %}
     {# Restringir a usuarios con Rol de moderador #}
     {% if is_granted('ROLE_MODERADOR') %}

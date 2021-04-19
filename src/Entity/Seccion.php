@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SeccionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,7 +32,7 @@ class Seccion
 
     /**
      * @ORM\OneToMany(targetEntity="Elemento", mappedBy="seccion", orphanRemoval=true)
-     *
+     * @var Collection
      */
     private $elementos;
 
@@ -60,9 +61,9 @@ class Seccion
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection $elementos
      */
-    public function getElementos(): ArrayCollection
+    public function getElementos(): Collection
     {
         return $this->elementos;
     }
