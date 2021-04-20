@@ -22,19 +22,15 @@ class SeccionRepository extends ServiceEntityRepository
     // /**
     //  * @return Seccion[] Returns an array of Seccion objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findAllOrderBy()
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('s.orden', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
 
 
     public function findById($id): ?Seccion
