@@ -44,5 +44,6 @@ security:
         - { path: ^/elemento, roles: ROLE_MODERADOR }
         - { path: ^/alergeno, roles: ROLE_MODERADOR }
         - { path: ^/secciones, roles: ROLE_MODERADOR }
+        - { path: ^/secciones, roles: ROLE_MODERADOR }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

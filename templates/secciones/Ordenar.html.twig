@@ -4,6 +4,7 @@
 {% block estilos %}
     <link rel="stylesheet" href="{{ asset('css/tabla.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/burbujas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ordenar.css') }}">
 {% endblock %}
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> {# Jquery UI CDN #}
@@ -14,20 +15,24 @@
 {% endblock %}
 {% block content %}
     <div class="contenido fondo_imagen">
-        <ul type="none" class="display_flex secciones_fondo secciones_overflow burbujas">
+        <div class="ordenar_contenedor">
+            <div class="ordenar_Titulo">
+                <p class="texto_mas_grande">Ordene los elementos</p>
+                <p class="">Pinche y arrastre las secciones para cambiar el orden</p>
+            </div>
+            <ul type="none" class="display_flex secciones_fondo secciones_overflow burbujas">
 
-            {% for sec in secciones %}
+                {% for sec in secciones %}
 
-                {% set vacio = true %}
-                {% for elemento in sec.elementos %}
-                    {% if vacio %}
-                        {% if elemento.visible %}
-                            {% set vacio = false %}
+                    {% set vacio = true %}
+                    {% for elemento in sec.elementos %}
+                        {% if vacio %}
+                            {% if elemento.visible %}
+                                {% set vacio = false %}
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                {% endfor %}
+                    {% endfor %}
 
-                {% if not vacio or is_granted('ROLE_MODERADOR') %}
                     <div class="burbuja burbuja_fondo">
                         <li value="{{ sec.id }}">
                             <a class="buruja_relleno">
@@ -46,9 +51,14 @@
                             </a>
                         </li>
                     </div>
-                {% endif %}
-            {% endfor %}
-        </ul>
+                {% endfor %}
+            </ul>
+            <div class="botones">
+                <a id="cancelar" class="btn btn-danger" href="{{ path('indexSec', {'sec': return}) }}"><i
+                            class="fas fa-arrow-left"></i>&nbsp&nbspVolver a Seccion</a>
+                <button id="aceptar" class="btn btn-success"><i class="fas fa-check"></i>&nbspAceptar Cambios</button>
+            </div>
+        </div>
     </div>
 
 

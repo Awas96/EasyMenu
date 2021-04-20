@@ -1,0 +1,15 @@
+.ordenar_Titulo {
+    padding: 1em;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.ordenar_contenedor {
+    height: 10em;
+}
+
+.ordenar_contenedor ul {
+    display: flex;
+    height: 100%;
+    margin-bottom: 3em;
+}

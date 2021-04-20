@@ -12,7 +12,7 @@
         <a class="btn btn-info botonCrear" href="{{ path('seccion_modificar', {'id': nSeccion}) }}"><i
                     class="fa fa-edit">
                 Modificar Seccion</i></a>
-        <a class="btn btn-success botonCrear" href="{{ path('secciones_ordenar') }}"><i
+        <a class="btn btn-success botonCrear" href="{{ path('secciones_ordenar' , {'returnSeccion': nSeccion}) }}"><i
                     class="fa fa-ellipsis-h">
                 Ordenar Secciones</i></a>
     </div>

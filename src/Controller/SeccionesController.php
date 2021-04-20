@@ -18,10 +18,12 @@ class SeccionesController extends AbstractController
      */
     public function seccionesOrdenar(SeccionRepository $seccionRepository): Response
     {
+        $returnURL = $_GET['returnSeccion'];
         $secciones = $seccionRepository->findAllOrderBy();
         return $this->render('secciones/Ordenar.html.twig', [
             'controller_name' => 'SeccionesController',
-            'secciones' => $secciones
+            'secciones' => $secciones,
+            'return' => $returnURL
         ]);
     }
 

@@ -127,5 +127,4 @@ class Seccion
 
         return $this;
     }
-
 }
