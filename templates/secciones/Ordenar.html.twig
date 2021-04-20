@@ -1,0 +1,55 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Listando Secciones{% endblock %}
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/tabla.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/burbujas.css') }}">
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> {# Jquery UI CDN #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> {# Jquery UI touch-punch CDN #}
+    <script src="{{ asset('js/sortable.js') }}"></script> {# sortable con Jquery UI #}
+
+
+{% endblock %}
+{% block content %}
+    <div class="contenido fondo_imagen">
+        <ul type="none" class="display_flex secciones_fondo secciones_overflow burbujas">
+
+            {% for sec in secciones %}
+
+                {% set vacio = true %}
+                {% for elemento in sec.elementos %}
+                    {% if vacio %}
+                        {% if elemento.visible %}
+                            {% set vacio = false %}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if not vacio or is_granted('ROLE_MODERADOR') %}
+                    <div class="burbuja burbuja_fondo">
+                        <li value="{{ sec.id }}">
+                            <a class="buruja_relleno">
+                                <div {% if vacio %} class="texto_opaco" {% endif %}>
+                                    <div>
+                        <span class="burbuja_icono">
+                        {% if sec.icono %}
+                            <i class="fas {{ sec.icono }}"></i>
+                        {% else %}
+                            <i class="fas fa-utensils"></i>
+                        {% endif %}
+                        </span>
+                                    </div>
+                                    <div class="burbuja_texto"><span>{{ sec.nombre }}</span></div>
+                                </div>
+                            </a>
+                        </li>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+
+{% endblock %}

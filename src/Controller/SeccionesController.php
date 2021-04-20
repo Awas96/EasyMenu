@@ -6,6 +6,7 @@ use App\Entity\Seccion;
 use App\Form\SeccionType;
 use App\Repository\SeccionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,15 +14,33 @@ use Symfony\Component\Routing\Annotation\Route;
 class SeccionesController extends AbstractController
 {
     /**
-     * @Route("/secciones/listar", name="secciones")
+     * @Route("/secciones/ordenar", name="secciones_ordenar")
      */
-    public function seccionesListar(SeccionRepository $seccionRepository): Response
+    public function seccionesOrdenar(SeccionRepository $seccionRepository): Response
     {
-        $secciones = $seccionRepository->findAll();
-        return $this->render('secciones/listar.html.twig', [
+        $secciones = $seccionRepository->findAllOrderBy();
+        return $this->render('secciones/Ordenar.html.twig', [
             'controller_name' => 'SeccionesController',
-            'seccion' => $secciones
+            'secciones' => $secciones
         ]);
+    }
+
+    /**
+     * @Route("/seccion/ordenar/{sec}", name="seccion_ajax")
+     */
+    public function acutalizarOrden(Request $request, $sec)
+    {
+
+        $orden = $request->get('orden');
+        $em = $this->getDoctrine()->getManager();
+        $seccion = $em->getRepository(Seccion::class)->findById($sec);
+        $seccion->setOrden($orden);
+        try {
+            $em->flush();
+
+            return new jsonresponse(true);
+        } catch (\PdoException $e) {
+        }
     }
 
     /**
@@ -32,6 +51,7 @@ class SeccionesController extends AbstractController
     {
         if (null == $seccion) {
             $seccion = new Seccion();
+            $seccion->setOrden(0);
 
             $this->getDoctrine()->getManager()->persist($seccion);
         }

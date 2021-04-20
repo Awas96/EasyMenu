@@ -35,6 +35,7 @@ class ElementoController extends AbstractController
         if (null == $elemento) {
             $elemento = new Elemento();
             $elemento->setVisible(true);
+            $elemento->setOrden(0);
             $elemento->setSeccion($seccionRepository->findById($sec));
             $this->getDoctrine()->getManager()->persist($elemento);
         } else {
@@ -90,7 +91,6 @@ class ElementoController extends AbstractController
             $elemento->setVisible(true);
         }
         $this->getDoctrine()->getManager()->flush();
-        dump($elemento);
         return $this->redirectToRoute('indexSec', [
             'sec' => $sec
         ]);

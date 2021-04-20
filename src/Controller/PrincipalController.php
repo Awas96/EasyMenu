@@ -15,7 +15,7 @@ class PrincipalController extends AbstractController
      */
     public function index(SeccionRepository $seccionRepository): Response
     {
-        $secciones = $seccionRepository->findAll();
+        $secciones = $seccionRepository->findAllOrderBy();
         return $this->render('principal/index.html.twig', [
             'controller_name' => 'PrincipalController',
             'secciones' => $secciones
@@ -26,7 +26,7 @@ class PrincipalController extends AbstractController
      */
     public function indexConSeccion(SeccionRepository $seccionRepository, ElementoRepository $elementoRepository, $sec): Response
     {
-        $secciones = $seccionRepository->findAll();
+        $secciones = $seccionRepository->findAllOrderBy();
         $elemento = $elementoRepository->listarElementos($sec);
         return $this->render('principal/index.html.twig', [
             'controller_name' => 'PrincipalController',
