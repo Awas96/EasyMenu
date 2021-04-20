@@ -6,6 +6,7 @@ use App\Repository\SeccionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=SeccionRepository::class)
@@ -31,11 +32,16 @@ class Seccion
     private $icono;
 
     /**
+     * @Gedmo\SortablePosition
+     * @ORM\Column(name="orden", type="integer")
+     */
+    private $orden;
+
+    /**
      * @ORM\OneToMany(targetEntity="Elemento", mappedBy="seccion", orphanRemoval=true)
      * @var Collection
      */
     private $elementos;
-
 
     public function __construct()
     {
@@ -110,5 +116,16 @@ class Seccion
         return $this;
     }
 
+    public function getOrden(): ?int
+    {
+        return $this->orden;
+    }
+
+    public function setOrden(int $orden): self
+    {
+        $this->orden = $orden;
+
+        return $this;
+    }
 
 }

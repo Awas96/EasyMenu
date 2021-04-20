@@ -49,10 +49,14 @@ class Elemento
     private $visible;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $orden;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $descripcion;
-
 
     public function __construct()
     {
@@ -148,6 +152,18 @@ class Elemento
     public function setVisible(bool $visible): self
     {
         $this->visible = $visible;
+
+        return $this;
+    }
+
+    public function getOrden(): ?int
+    {
+        return $this->orden;
+    }
+
+    public function setOrden(int $orden): self
+    {
+        $this->orden = $orden;
 
         return $this;
     }
