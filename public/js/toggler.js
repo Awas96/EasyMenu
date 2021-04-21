@@ -6,8 +6,9 @@ function toggle() {
 
     elementos.each(function (index) {
         let elemento = $(this);
-        let trSpoiler = $('.spoiler')[index];
+        let trSpoiler = $(this).parent().next().children()[0].children
         elemento.click(function () {
+            elemento.toggleClass("underline")
             mover(trSpoiler);
             girar(this.querySelector("i"));
         })

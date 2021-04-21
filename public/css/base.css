@@ -85,3 +85,7 @@ body {
 .margen_arriba {
     margin-top: 0.5em;
 }
+
+.underline {
+    text-decoration: underline;
+}

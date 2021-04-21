@@ -40,7 +40,7 @@
     </div>
 {% endif %}
 <div class="tabla_orden tabla_fondo">
-    <table class="tabla table-borderless table-hover ">
+    <table class="tabla table-borderless ">
         <thead class="tabla_cabecera">
         <tr>
             <th class="
@@ -55,6 +55,7 @@
             {% endif %}
         </tr>
         </thead>
+        <tbody>
         {% for i in elementos %}
             {% if i.visible or is_granted('ROLE_MODERADOR') %}
                 <tr class="tabla_fila cursor {% if not i.visible %} texto_opaco {% endif %}">
@@ -66,7 +67,13 @@
                         <div class="
                     {% if 'Tapas' in sect %} text-center
                     {% endif %}">
-                            <span> <i class="fas fa-caret-down cerrado"></i>&nbsp{{ i.nombre }}</span>
+                            <span> <i class="fas
+                            {% if i.alergenos|length > 0 or i.descripcion is not empty %}
+                            fa-caret-down cerrado mr-1
+                            {% else %}
+                            fa-caret-right cerrado mr-2
+                            {% endif %}
+                            "></i>{{ i.nombre }}</span>
                         </div>
 
                     </td>
@@ -118,6 +125,7 @@
                 </tr>
             {% endif %}
         {% endfor %}
+        </tbody>
     </table>
 </div>
 
