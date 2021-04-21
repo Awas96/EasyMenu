@@ -7,7 +7,7 @@ function toggle() {
     elementos.each(function (index) {
         let elemento = $(this);
         let trSpoiler = $('.spoiler')[index];
-        elemento.parent().click(function () {
+        elemento.click(function () {
             mover(trSpoiler);
             girar(this.querySelector("i"));
         })

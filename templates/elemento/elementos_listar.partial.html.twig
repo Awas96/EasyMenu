@@ -86,10 +86,11 @@
                             <a class="btn btn-outline-dark boton_editar"
                                href="{{ path('elemento_modificar', {'id': i.id}) }}"><i
                                         class="fas fa-edit"></i></a>
-                            <a class="btn btn-outline-dark boton_editar"
-                               href="{{ path('elemento_ocultar', {'id': i.id, 'sec': i.seccion.id}) }}">
+                            <button id="btn{{ i.id }}" value="{{ i.id }}"
+                                    class="btn_ocultador btn btn-outline-dark boton_editar"
+                                    href="{# {{ path('elemento_ocultar', {'id': i.id, 'sec': i.seccion.id}) }} #}">
                                 {% if i.visible %}
-                                <i class="fas fa-eye-slash"></i></a>
+                                <i class="fas fa-eye-slash"></i></button>
                             {% else %}
                                 <i class="fas fa-eye"></i></a>
                             {% endif %}

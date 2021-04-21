@@ -103,7 +103,7 @@ class ElementoController extends AbstractController
      */
     public function OcultarElemento(Elemento $elemento, ElementoRepository $elementoRepository, $id): Response
     {
-        $sec = $_GET["sec"];
+
         $elemento = $elementoRepository->GetElementByID($id);
         $estado = $elemento->getVisible();
         if ($estado) {
@@ -111,10 +111,12 @@ class ElementoController extends AbstractController
         } else {
             $elemento->setVisible(true);
         }
-        $this->getDoctrine()->getManager()->flush();
-        return $this->redirectToRoute('indexSec', [
-            'sec' => $sec
-        ]);
+        $em = $this->getDoctrine()->getManager();
+        try {
+            $em->flush();
+            return new jsonresponse(true);
+        } catch (\PdoException $e) {
+        }
     }
 
 }
