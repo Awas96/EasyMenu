@@ -31,8 +31,6 @@ class SeccionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
-
     public function findById($id): ?Seccion
     {
         return $this->createQueryBuilder('s')

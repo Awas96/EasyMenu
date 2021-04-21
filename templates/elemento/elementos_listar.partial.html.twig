@@ -6,9 +6,6 @@
 
 {% if is_granted('ROLE_MODERADOR') %}
     <div class="botones">
-        <a class="btn btn-primary boton_crear" href="{{ path('elemento_nuevo', {'sec': nSeccion}) }}"><i
-                    class="fa fa-plus">
-                Nuevo elemento</i></a>
         <a class="btn btn-info botonCrear" href="{{ path('seccion_modificar', {'id': nSeccion}) }}"><i
                     class="fa fa-edit">
                 Modificar Seccion</i></a>
@@ -32,6 +29,16 @@
     </h2>
 </div>
 <hr>
+{% if is_granted('ROLE_MODERADOR') %}
+    <div class="botones">
+        <a class="btn btn-primary boton_crear" href="{{ path('elemento_nuevo', {'sec': nSeccion}) }}"><i
+                    class="fa fa-plus">
+                Nuevo elemento</i></a>
+        <a class="btn btn-secondary botonCrear" href="{{ path('elemento_ordenar' , {'sec': nSeccion}) }}"><i
+                    class="fa fa-list">
+                Ordenar Elementos</i></a>
+    </div>
+{% endif %}
 <div class="tabla_orden tabla_fondo">
     <table class="tabla table-borderless table-hover ">
         <thead class="tabla_cabecera">
@@ -43,7 +50,6 @@
                 ">
                 Nombre
             </th>
-
             {% if 'Tapas' not in sect %}
                 <th>Precio</th>
             {% endif %}

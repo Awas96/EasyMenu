@@ -27,7 +27,7 @@ class PrincipalController extends AbstractController
     public function indexConSeccion(SeccionRepository $seccionRepository, ElementoRepository $elementoRepository, $sec): Response
     {
         $secciones = $seccionRepository->findAllOrderBy();
-        $elemento = $elementoRepository->listarElementos($sec);
+        $elemento = $elementoRepository->findSecOrderBy($sec);
         return $this->render('principal/index.html.twig', [
             'controller_name' => 'PrincipalController',
             'secciones' => $secciones,

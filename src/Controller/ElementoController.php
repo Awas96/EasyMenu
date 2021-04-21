@@ -7,6 +7,7 @@ use App\Form\ElementoType;
 use App\Repository\ElementoRepository;
 use App\Repository\SeccionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,15 +15,34 @@ use Symfony\Component\Routing\Annotation\Route;
 class ElementoController extends AbstractController
 {
     /**
-     * @Route("/elemento/listar/{sec}", name="lista_elementos")
+     * @Route("/elemento/ordenar/{sec}", name="elemento_ordenar")
      */
-    public function listaElementos(ElementoRepository $elementoRepository, $sec): Response
+    public function ordenaElementos(ElementoRepository $elementoRepository, $sec): Response
     {
-        $elemento = $elementoRepository->listarElementos($sec);
-        return $this->render('elemento/listar.html.twig', [
-            'controller_name' => 'ElementoController',
-            'elementos' => $elemento,
+        $elementos = $elementoRepository->findSecOrderBy($sec);
+        return $this->render('elemento/ordenar.html.twig', [
+            'controller_name' => 'SeccionesController',
+            'elementos' => $elementos,
+            'sec' => $sec
         ]);
+    }
+
+    /**
+     * @Route("/elemento/AJAX/{id}", name="elemento_ajax")
+     */
+    public function acutalizarOrden(Request $request, $id)
+    {
+
+        $orden = $request->get('orden');
+        $em = $this->getDoctrine()->getManager();
+        $elemento = $em->getRepository(Elemento::class)->GetElementByID($id);
+        $elemento->setOrden($orden);
+        dump($elemento);
+        try {
+            $em->flush();
+            return new jsonresponse(true);
+        } catch (\PdoException $e) {
+        }
     }
 
     /**
@@ -34,6 +54,7 @@ class ElementoController extends AbstractController
 
         if (null == $elemento) {
             $elemento = new Elemento();
+            $elemento->setPrecio(0.00);
             $elemento->setVisible(true);
             $elemento->setOrden(0);
             $elemento->setSeccion($seccionRepository->findById($sec));
@@ -47,9 +68,9 @@ class ElementoController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            /*return $this->redirectToRoute('indexSec', [
+            return $this->redirectToRoute('indexSec', [
                 'sec' => $sec
-            ]);*/
+            ]);
         }
 
         return $this->render('elemento/modificar.partial.html.twig', [

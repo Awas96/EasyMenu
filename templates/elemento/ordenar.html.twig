@@ -1,0 +1,73 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Ordenar Elementos{% endblock %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/tabla.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/burbujas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ordenar.css') }}">
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> {# Jquery UI CDN #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> {# Jquery UI touch-punch CDN #}
+    <script src="{{ asset('js/sortable.js') }}"></script> {# sortable con Jquery UI #}
+{% endblock %}
+
+{% block content %}
+    <div class="fondo_imagen">
+        <p class="ordenar_Titulo texto_mas_grande">Ordene los elementos de la
+            tabla {{ elementos[0].seccion.nombre }}</p>
+        <p class="text-center mb-3">Arrastra los elementos a la posicion que deba estar</p>
+        <div class="botones">
+            <a id="cancelar" class="btn btn-danger" href="{{ path('indexSec', {'sec': sec}) }}"><i
+                        class="fas fa-arrow-left"></i>&nbsp&nbspVolver a Seccion</a>
+            <button id="aceptarElemento" class="btn btn-success"><i class="fas fa-check"></i>&nbspAceptar Cambios
+            </button>
+        </div>
+        <div class="tabla_orden tabla_fondo">
+            <table class=" tabla table-borderless table-hover ">
+                <thead class="tabla_cabecera">
+                <tr>
+                    <th class="texto_grande">Nombre
+                    </th>
+                    <th class="texto_grande">Precio</th>
+                </tr>
+                </thead>
+                <tbody class="sortable">
+                {% for i in elementos %}
+                    {% if i.visible or is_granted('ROLE_MODERADOR') %}
+                        <tr value="{{ i.id }}" class="tabla_fila cursor {% if not i.visible %} texto_opaco {% endif %}">
+                            {% if i.alergenos|length > 0 or i.descripcion is not empty %}
+                            <td class=" texto_grande">
+                        {% else %}
+                            <td class="texto_grande">
+                                {% endif %}
+                                <div class="
+                    {% if 'Tapas' in sec %} text-center
+                    {% endif %}">
+                                    <span> <i class="fas fa-grip-lines cerrado"></i>&nbsp{{ i.nombre }}</span>
+                                </div>
+                            </td>
+                            {% if 'Tapas' not in sec %}
+                                <td class="tupla_precio texto_grande">
+                        <span>
+                            {% if i.precio < 10 %}
+                                &nbsp
+                            {% endif %}
+                            {{ i.precio }}&nbsp€
+                        </span>
+
+                                </td>
+                            {% endif %}
+                        </tr>
+
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+{% endblock %}

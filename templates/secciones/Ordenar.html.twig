@@ -20,7 +20,7 @@
                 <p class="texto_mas_grande">Ordene los elementos</p>
                 <p class="">Pinche y arrastre las secciones para cambiar el orden</p>
             </div>
-            <ul type="none" class="display_flex secciones_fondo secciones_overflow burbujas">
+            <ul type="none" class="display_flex secciones_fondo secciones_overflow sortable">
 
                 {% for sec in secciones %}
 
@@ -56,10 +56,9 @@
             <div class="botones">
                 <a id="cancelar" class="btn btn-danger" href="{{ path('indexSec', {'sec': return}) }}"><i
                             class="fas fa-arrow-left"></i>&nbsp&nbspVolver a Seccion</a>
-                <button id="aceptar" class="btn btn-success"><i class="fas fa-check"></i>&nbspAceptar Cambios</button>
+                <button id="aceptarSeccion" class="btn btn-success"><i class="fas fa-check"></i>&nbspAceptar Cambios
+                </button>
             </div>
         </div>
     </div>
-
-
 {% endblock %}

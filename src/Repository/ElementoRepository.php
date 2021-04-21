@@ -36,6 +36,15 @@ class ElementoRepository extends ServiceEntityRepository
     }
     */
 
+    public function findSecOrderBy($Seccion)
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.seccion = :seccion')
+            ->setParameter('seccion', $Seccion)
+            ->orderBy('s.orden', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
     public function listarElementos($Seccion)
     {
