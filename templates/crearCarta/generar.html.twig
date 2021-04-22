@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/tabla.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/burbujas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/formulario.css') }}"/>
+
+{% endblock %}
+
+
+{% block title %}Crear una carta!{% endblock %}
+
+{% block content %}
+
+    <div class="contenido ">
+        <h1 class="text-center texto_grande margen_arriba">Formulario de creacion de Carta</h1>
+        <h2 class="text-center margen_arriba">Selecciona los elementos que quieres sacar en la carta</h2>
+        <div class="data formulario"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/pdf.js') }}"></script> {# Utilizado para mostrar o esconder elementos quitando o poniendo clases #}
+{% endblock %}

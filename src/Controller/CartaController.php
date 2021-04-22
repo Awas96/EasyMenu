@@ -19,7 +19,6 @@ class CartaController extends AbstractController
     {
         $secciones = $seccionRepository->findAllOrderBy();
         $elemento = $elementoRepository->findSecOrderBy($sec);
-        dump($elemento);
         return $this->render('carta/seccion.html.twig', [
             'controller_name' => 'PrincipalController',
             'secciones' => $secciones,
@@ -38,13 +37,18 @@ class CartaController extends AbstractController
         $seccion = $seccionRepository->findById($sec);
         $arr = [];
         array_push($arr, [
+            'tipo' => 'seccion',
+            'id' => $seccion->getId(),
             'titulo' => $seccion->getNombre(),
             'icono' => $seccion->getIcono()
         ]);
         foreach ($elemento as $item) {
             $elemento = array(
+                'tipo' => 'elemento',
+                'id' => $item->getId(),
                 'nombre' => $item->getNombre(),
                 'precio' => $item->getPrecio(),
+                'descripcion' => $item->getdescripcion(),
             );
             array_push($arr, $elemento);
         }

@@ -45,5 +45,6 @@ security:
         - { path: ^/alergeno, roles: ROLE_MODERADOR }
         - { path: ^/secciones, roles: ROLE_MODERADOR }
         - { path: ^/secciones, roles: ROLE_MODERADOR }
+        - { path: ^/crearpdf, roles: ROLE_MODERADOR }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

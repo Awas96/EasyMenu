@@ -12,14 +12,35 @@
     padding-bottom: 1em;
 }
 
-#elemento_alergenos {
+#elemento_alergenos, .formulario_elementos {
+
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    overflow: auto;
+    overflow: scroll;
     height: 10em;
     border: 1px solid lightgray;
     padding: 0.3em;
+
+}
+
+.formulario_pdf {
+    margin: 0 auto;
+    align-content: space-evenly;
+    width: 90%;
+    height: 15em;
+    border-radius: 7px;
+    background-color: whitesmoke;
+}
+
+.formulario_elemento_unico {
+    background-color: white;
+    margin: 0 auto;
+    width: 98%;
+    overflow: auto;
+    display: flex;
+    border: 1px solid lightgray;
+    padding: 0.3em;
+    padding-left: 1.5em;
     border-radius: 7px;
 }
 
@@ -29,15 +50,20 @@
 }
 
 .form-check-input {
-
+    position: relative;
     -ms-transform: scale(1.5); /* IE */
     -moz-transform: scale(1.5); /* FF */
     -o-transform: scale(1.5); /* Opera */
     transform: scale(1.5);
     padding: 0.3em;
-    margin-bottom: 0.3em;
+    margin-right: 0.3em;
 }
 
 .form-check-label {
     align-self: baseline;
+}
+
+.form_element_style {
+
+
 }

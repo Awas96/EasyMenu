@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CrearPdfController extends AbstractController
 {
     /**
-     * @Route("/crearPdf/generar/", name="genera_pdf")
+     * @Route("/crearpdf/generar/", name="genera_pdf")
      */
     public function generate_pdf(SeccionRepository $seccionRepository, ElementoRepository $elementoRepository, $sec)
     {
@@ -50,18 +50,16 @@ class CrearPdfController extends AbstractController
     }
 
     /**
-     * @Route("/crearPdf/generar", name="generarCarta")
+     * @Route("/crearpdf/formulario", name="generarCarta")
      */
-    public function generarCarta(SeccionRepository $seccionRepository, ElementoRepository $elementoRepository, $sec): Response
+    public function generarCarta(SeccionRepository $seccionRepository): Response
     {
         $secciones = $seccionRepository->findAllOrderBy();
-        $elemento = $elementoRepository->findSecOrderBy($sec);
-        dump($elemento);
+
+
         return $this->render('crearCarta/generar.html.twig', [
             'controller_name' => 'PrincipalController',
-            'secciones' => $secciones,
-            'nSeccion' => $sec,
-            'elementos' => $elemento
+            'secciones' => $secciones
         ]);
     }
 

@@ -92,5 +92,26 @@ class SeccionesController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/secciones/datos", name="secciones_datos")
+     */
+    public function getSeccion(SeccionRepository $seccionRepository): Response
+    {
+        $secciones = $seccionRepository->findAllOrderBy();
+        $arr = [];
 
+        foreach ($secciones as $item) {
+            $elemento = array(
+                'id' => $item->getId(),
+                'nombre' => $item->getNombre(),
+                'icono' => $item->getIcono(),
+            );
+            array_push($arr, $elemento);
+        }
+
+        try {
+            return new JsonResponse($arr);
+        } catch (\PdoException $e) {
+        }
+    }
 }
