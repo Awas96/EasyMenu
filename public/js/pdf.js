@@ -1,10 +1,4 @@
-document.addEventListener("DOMContentLoaded", main);
-
-function main() {
-    cargarSecciones();
-
-}
-
+document.addEventListener("DOMContentLoaded", cargarSecciones);
 
 function cargarSecciones() {
     let link = "/secciones/datos"
@@ -23,7 +17,7 @@ function ajax(link, orden) {
     })
 };
 
-
+// primera parte de la inrfaz para seleccionar los elementos a mostrar
 let escribirSecciones = (data) => {
     let ss = window.sessionStorage;
     /* Limpiamos session Storage por si el usuario recarga*/
@@ -38,7 +32,7 @@ let escribirSecciones = (data) => {
         let check = document.createElement("input");
         let label = document.createElement("label");
         let icono = document.createElement("i")
-        let texto = document.createTextNode(e.nombre);
+        let texto = document.createTextNode(" " + e.nombre);
         check.type = "checkbox"
         check.id = "label_" + e.id;
         check.value = e.id;
@@ -61,15 +55,15 @@ let escribirSecciones = (data) => {
     let botonera = document.createElement("div");
     let boton = document.createElement("button");
     let icono = document.createElement("i");
-    let texto = document.createTextNode("Seleccionar");
+    let texto = document.createTextNode("  Seleccionar");
 
-    icono.classList.add("fas", "fa-check")
+    icono.classList.add("fas", "fa-check");
     boton.appendChild(icono);
     boton.appendChild(texto);
-    boton.classList.add("btn", "btn-success")
+    boton.classList.add("btn", "btn-success");
     botonEventos(boton);
     botonera.appendChild(boton);
-    botonera.classList.add("botonera", "text-center", "mt-4")
+    botonera.classList.add("botones", "text-center", "mt-4")
     div.appendChild(botonera);
 
 
@@ -82,10 +76,12 @@ let botonEventos = (boton) => {
         elementos.forEach(function (e, i) {
             let link = "/carta/datos/" + e.attributes["value"].value
             ajax(link, escribirStorage)
+
         })
+        animaBoton(this);
         setTimeout(function () {
             escribirListas();
-        }, 1000);
+        }, 1500);
     })
 }
 
@@ -101,26 +97,100 @@ let leerStorage = () => {
         i = keys.length;
     //arreglar cosa para que solo coja los datos del storage si la key empieza por seccion o algo asi yo que se tio
     while (i--) {
-        console.log(values)
         values.push(sessionStorage.getItem(keys[i]));
     }
     let arrSeccion = [];
     values.forEach((e) => {
-        let objeto = JSON.parse(e);
 
-
+        arrSeccion.push(JSON.parse(e))
     });
-    return values;
+    return arrSeccion;
 }
 
+//segunda parte de la intefaz una vez ya estan seleccionados las secciones
 let escribirListas = () => {
     let div = document.querySelector('.data');
+    let divListas = document.createElement('div');
+    divListas.classList.add("formulario_lista_spans")
     let sessionStorage = window.sessionStorage;
     div.innerHTML = "";
     let contenedor = document.createElement("div");
-    leerStorage();
-    let todas = sessionStorage.getItem('seccion_*')
+    let titulo = document.createElement("p");
+    titulo.classList.add("texto_grande", "text-center", "mb-4");
+    titulo.innerText = "Se creará una carta con los siguientes elementos..."
+    div.appendChild(titulo)
+    let carta = leerStorage();
+    carta.forEach((e) => {
+        let divlista = document.createElement('div');
+        divlista.classList.add("formulario_lista_individual")
 
-    //Terminar cosa para que cargue los elementos y escriba todo en pdf o algo ykse
+        let lista = document.createElement('ol');
+        e.forEach(function (elemento) {
+            let elementoLista = document.createElement('li');
+            let span1 = document.createElement('span');
+            let span2 = document.createElement('span');
 
+            if (elemento.tipo === "seccion") {
+                let icono = document.createElement('i')
+                icono.classList.add("fas", elemento.icono);
+                divlista.classList.add("order-" + elemento.ordenSec);
+                span1.appendChild(icono);
+                span2.innerText = " " + elemento.titulo;
+
+                elementoLista.classList.add("texto_grande", "mb-1");
+            } else {
+                span1.innerText = elemento.nombre;
+                span2.innerText = elemento.precio;
+                elementoLista.classList.add("formulario_lista_elemento")
+            }
+
+            elementoLista.value = elemento.id;
+
+            elementoLista.appendChild(span1);
+            if (!e[0].titulo.includes("Tapas")) {
+                elementoLista.appendChild(span2);
+            } else {
+                if (elemento.tipo == "seccion") elementoLista.appendChild(span2)
+            }
+            lista.appendChild(elementoLista);
+
+        });
+        divlista.appendChild(lista);
+        divListas.appendChild(divlista);
+        div.appendChild(divListas);
+
+
+    })
+    //creacion de botones de esta interfaz
+    let divbotones = document.createElement("div");
+    divbotones.classList.add("botones");
+    //Creacion de boton para volver al principio
+    let btnCancelar = document.createElement("button");
+    btnCancelar.addEventListener("click", cargarSecciones);
+    btnCancelar.classList.add("btn", "btn-danger");
+    let iconoCancelar = document.createElement("i");
+    iconoCancelar.classList.add("fas", "fa-arrow-left");
+    let spanCancelar = document.createElement("span")
+    spanCancelar.innerText = " cancelar"
+    btnCancelar.appendChild(iconoCancelar)
+    btnCancelar.appendChild(spanCancelar)
+    //creacion de boton para submitear
+    let btnImprimir = document.createElement("button");
+    btnImprimir.addEventListener("click", cargarSecciones);
+    btnImprimir.classList.add("btn", "btn-success");
+    let iconoImprimir = document.createElement("i");
+    iconoImprimir.classList.add("fas", "fa-check");
+    let spanImprimir = document.createElement("span")
+    spanImprimir.innerText = " Aceptar"
+    btnImprimir.appendChild(iconoImprimir)
+    btnImprimir.appendChild(spanImprimir)
+
+    divbotones.appendChild(btnCancelar)
+    divbotones.appendChild(btnImprimir)
+    div.appendChild(divbotones);
+}
+
+let animaBoton = (e) => {
+    e.childNodes[0].classList.remove("fa-check");
+    e.childNodes[0].classList.add("fa-spinner", "fa-spin");
 }
