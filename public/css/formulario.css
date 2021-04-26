@@ -63,7 +63,27 @@
     align-self: baseline;
 }
 
-.form_element_style {
+.formulario_lista_spans {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 
+.formulario_lista_elemento {
+    margin-bottom: 0.3em;
+}
 
+.formulario_lista_individual {
+    padding: 1em;
+    border: 1px solid lightgray;
+    border-radius: 7px;
+    margin-bottom: 1.5em;
+}
+
+.formulario_lista_elemento::before {
+    content: "- ";
+}
+
+.formulario_lista_elemento span:nth-child(2)::before {
+    content: ".....";
 }

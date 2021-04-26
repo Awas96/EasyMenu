@@ -87,11 +87,6 @@
 
 /* botones para el final de la tabla  */
 
-.botones {
-    display: flex;
-    justify-content: space-around;
-    border-radius: 10px;
-}
 
 .cerrado {
     transition: transform 400ms ease-in-out;
