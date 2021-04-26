@@ -1,0 +1,86 @@
+{% if elementos[0] is defined %}
+    {% set sect =  elementos[0].seccion.nombre %}
+{% else %}
+    {% set sect = "¡Sección Vacía!" %}
+{% endif %}
+
+<div class="tabla_fondo">
+    <h2 class="text-center texto_mas_grande p-3">
+        {% if elementos[0].seccion.icono is defined %}
+            {% if elementos[0].seccion.icono is not null %}
+                <i class="fas {{ elementos[0].seccion.icono }}"></i>
+            {% else %}
+                <i class="fas fa-utensils"></i>
+            {% endif %}
+        {% endif %}
+        <div>
+            <span class="texto_grande">{{ sect }}</span>
+        </div>
+    </h2>
+</div>
+<hr>
+<div class="tabla_orden tabla_fondo">
+    <table class="tabla table-borderless ">
+        <thead class="tabla_cabecera">
+        <tr>
+            <th class="
+                {% if 'Tapas' in sect %}
+                    text-center
+                {% endif %}
+                ">
+                Nombre
+            </th>
+            {% if 'Tapas' not in sect %}
+                <th>Precio</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in elementos %}
+
+            <tr class="tabla_fila cursor">
+                <td class="texto_grande">
+                    <div class="
+                    {% if 'Tapas' in sect %} text-center
+                    {% endif %}">
+                        <span> <i class="fas fa-angle-right  mr-1"></i>{{ i.nombre }}</span>
+                    </div>
+
+                </td>
+                {% if 'Tapas' not in sect %}
+                    <td class="tupla_precio texto_grande">
+                        <span>
+                            {% if i.precio < 10 %}
+                                &nbsp
+                            {% endif %}
+                            {{ i.precio }}&nbsp€
+                        </span>
+
+                    </td>
+                {% endif %}
+
+            </tr>
+            <tr class="">
+                <td colspan="3" class="w-100" style="display: none">
+                    <div class="spoiler" style="display: none">
+                        <div class="spoiler_descripcion">{{ i.descripcion }}</div>
+                        <div class="spoiler_imagenes">
+                            {% for a in i.alergenos %}
+                                <div>
+                                    <figure class="display_flex spoiler_figure">
+                                        <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}"
+                                             title="{{ a.nombre }}"
+                                             alt="{{ a.nombre }}">
+                                        <figcaption>{{ a.descripcion }}</figcaption>
+                                    </figure>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+

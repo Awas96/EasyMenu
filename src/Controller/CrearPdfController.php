@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Repository\ElementoRepository;
 use App\Repository\SeccionRepository;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,40 +13,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class CrearPdfController extends AbstractController
 {
     /**
-     * @Route("/crearpdf/generar/", name="genera_pdf")
+     * @Route("/crearpdf/generar/{slug}", name="genera_pdf")
      */
-    public function generate_pdf(SeccionRepository $seccionRepository, ElementoRepository $elementoRepository, $sec)
+    public function generate_pdf(Pdf $pdf, ElementoRepository $elementoRepository, $slug)
     {
-
-        $options = new Options();
-        $options->set('defaultFont', 'Roboto');
-        $secciones = $seccionRepository->findAllOrderBy();
-        $elemento = $elementoRepository->findSecOrderBy($sec);
-
-        $dompdf = new Dompdf($options);
-
-        $data = array(
-            'headline' => 'xDDD'
-        );
-        $html = $this->renderView('principal/index.html.twig', [
+        $arr = json_decode($slug);
+        usort($arr, function ($a, $b) {
+            return strcmp($a[1], $b[1]);
+        });
+        $elementos = [];
+        foreach ($arr as $el) {
+            array_push($elementos, $elementoRepository->listarElementos($el[0]));
+        }
+        $html = $this->renderView('crearCarta/exportador.html.twig', [
             'headline' => "Test pdf generator",
             "Attachment" => true,
-            'secciones' => $secciones,
-            'nSeccion' => $sec,
-            'elementos' => $elemento
+            'datos' => $elementos
         ]);
-
-
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        $dompdf->stream("testpdf.pdf", [
-            "Attachment" => true,
-            'secciones' => $secciones,
-            'nSeccion' => $sec,
-            'elementos' => $elemento
-        ]);
-
+        return new PdfResponse(
+            $pdf->getOutputFromHtml($html),
+            'carta.pdf'
+        );
     }
 
     /**

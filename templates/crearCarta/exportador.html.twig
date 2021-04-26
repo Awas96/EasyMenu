@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/tabla.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/pdf.css') }}"/>
+{% endblock %}
+
+
+{% block title %}Carta{% endblock %}
+
+{% block content %}
+    <div class="fondo_imagen">
+        <div class="pdf_listas">
+            {% for elementos in datos %} {# Aqui estan las secciones que hemos sacado mediante doctrine #}
+                <div class="pdf_lista fondo_imagen">
+                    {% include 'crearCarta/tabla_pdf_partial.html.twig' %}
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/ocultar.js') }}"></script> {# Utilizado para mostrar o esconder elementos quitando o poniendo clases #}
+{% endblock %}
