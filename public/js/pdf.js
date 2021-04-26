@@ -6,16 +6,15 @@ function cargarSecciones() {
 }
 
 
-function ajax(link, orden) {
-    let ok = true
+function ajax(link, orden = null) {
     $.ajax({
         type: "POST",
         url: link,
         success: function (texto) {
-            orden(texto);
+            if (typeof orden === 'function') orden(texto);
         }
     })
-};
+}
 
 // primera parte de la inrfaz para seleccionar los elementos a mostrar
 let escribirSecciones = (data) => {
@@ -31,7 +30,7 @@ let escribirSecciones = (data) => {
         let tupla = document.createElement("div");
         let check = document.createElement("input");
         let label = document.createElement("label");
-        let icono = document.createElement("i")
+        let icono = document.createElement("i");
         let texto = document.createTextNode(" " + e.nombre);
         check.type = "checkbox"
         check.id = "label_" + e.id;
@@ -46,8 +45,7 @@ let escribirSecciones = (data) => {
         label.appendChild(texto);
         tupla.appendChild(check);
         tupla.appendChild(label);
-        tupla.classList.add()
-        contenedor.appendChild(tupla)
+        contenedor.appendChild(tupla);
     })
     div.appendChild(contenedor)
 
@@ -63,7 +61,7 @@ let escribirSecciones = (data) => {
     boton.classList.add("btn", "btn-success");
     botonEventos(boton);
     botonera.appendChild(boton);
-    botonera.classList.add("botones", "text-center", "mt-4")
+    botonera.classList.add("botones", "text-center", "mt-4");
     div.appendChild(botonera);
 
 
@@ -72,10 +70,10 @@ let escribirSecciones = (data) => {
 let botonEventos = (boton) => {
     boton.addEventListener("click", function () {
         this.disabled = true;
-        let elementos = document.querySelectorAll("input:checked")
-        elementos.forEach(function (e, i) {
-            let link = "/carta/datos/" + e.attributes["value"].value
-            ajax(link, escribirStorage)
+        let elementos = document.querySelectorAll("input:checked");
+        elementos.forEach(function (e) {
+            let link = "/carta/datos/" + e.attributes["value"].value;
+            ajax(link, escribirStorage);
 
         })
         animaBoton(this);
@@ -86,13 +84,13 @@ let botonEventos = (boton) => {
 }
 
 let escribirStorage = (data) => {
-    let sessionStorage = window.sessionStorage
+    let sessionStorage = window.sessionStorage;
     sessionStorage.setItem("seccion_" + data[0].titulo, JSON.stringify(data));
 
 }
 
 let leerStorage = () => {
-    var values = [],
+    let values = [],
         keys = Object.keys(sessionStorage),
         i = keys.length;
     //arreglar cosa para que solo coja los datos del storage si la key empieza por seccion o algo asi yo que se tio
@@ -102,7 +100,7 @@ let leerStorage = () => {
     let arrSeccion = [];
     values.forEach((e) => {
 
-        arrSeccion.push(JSON.parse(e))
+        arrSeccion.push(JSON.parse(e));
     });
     return arrSeccion;
 }
@@ -111,18 +109,16 @@ let leerStorage = () => {
 let escribirListas = () => {
     let div = document.querySelector('.data');
     let divListas = document.createElement('div');
-    divListas.classList.add("formulario_lista_spans")
-    let sessionStorage = window.sessionStorage;
+    divListas.classList.add("formulario_lista_spans");
     div.innerHTML = "";
-    let contenedor = document.createElement("div");
     let titulo = document.createElement("p");
     titulo.classList.add("texto_grande", "text-center", "mb-4");
-    titulo.innerText = "Se creará una carta con los siguientes elementos..."
+    titulo.innerText = "Se creará una carta con los siguientes elementos...";
     div.appendChild(titulo)
     let carta = leerStorage();
     carta.forEach((e) => {
         let divlista = document.createElement('div');
-        divlista.classList.add("formulario_lista_individual")
+        divlista.classList.add("formulario_lista_individual");
 
         let lista = document.createElement('ol');
         e.forEach(function (elemento) {
@@ -131,7 +127,7 @@ let escribirListas = () => {
             let span2 = document.createElement('span');
 
             if (elemento.tipo === "seccion") {
-                let icono = document.createElement('i')
+                let icono = document.createElement('i');
                 icono.classList.add("fas", elemento.icono);
                 divlista.classList.add("order-" + elemento.ordenSec);
                 span1.appendChild(icono);
@@ -141,7 +137,7 @@ let escribirListas = () => {
             } else {
                 span1.innerText = elemento.nombre;
                 span2.innerText = elemento.precio;
-                elementoLista.classList.add("formulario_lista_elemento")
+                elementoLista.classList.add("formulario_lista_elemento");
             }
 
             elementoLista.value = elemento.id;
@@ -150,7 +146,7 @@ let escribirListas = () => {
             if (!e[0].titulo.includes("Tapas")) {
                 elementoLista.appendChild(span2);
             } else {
-                if (elemento.tipo == "seccion") elementoLista.appendChild(span2)
+                if (elemento.tipo === "seccion") elementoLista.appendChild(span2);
             }
             lista.appendChild(elementoLista);
 
@@ -170,27 +166,41 @@ let escribirListas = () => {
     btnCancelar.classList.add("btn", "btn-danger");
     let iconoCancelar = document.createElement("i");
     iconoCancelar.classList.add("fas", "fa-arrow-left");
-    let spanCancelar = document.createElement("span")
-    spanCancelar.innerText = " cancelar"
-    btnCancelar.appendChild(iconoCancelar)
-    btnCancelar.appendChild(spanCancelar)
+    let spanCancelar = document.createElement("span");
+    spanCancelar.innerText = " cancelar";
+    btnCancelar.appendChild(iconoCancelar);
+    btnCancelar.appendChild(spanCancelar);
     //creacion de boton para submitear
     let btnImprimir = document.createElement("button");
-    btnImprimir.addEventListener("click", cargarSecciones);
     btnImprimir.classList.add("btn", "btn-success");
     let iconoImprimir = document.createElement("i");
     iconoImprimir.classList.add("fas", "fa-check");
-    let spanImprimir = document.createElement("span")
-    spanImprimir.innerText = " Aceptar"
-    btnImprimir.appendChild(iconoImprimir)
-    btnImprimir.appendChild(spanImprimir)
-
-    divbotones.appendChild(btnCancelar)
-    divbotones.appendChild(btnImprimir)
+    let spanImprimir = document.createElement("span");
+    spanImprimir.innerText = " Aceptar";
+    btnImprimir.appendChild(iconoImprimir);
+    btnImprimir.appendChild(spanImprimir);
+    btnImprimir.addEventListener("click", function () {
+        sacarPDF(carta)
+    });
+    divbotones.appendChild(btnCancelar);
+    divbotones.appendChild(btnImprimir);
     div.appendChild(divbotones);
 }
 
 let animaBoton = (e) => {
     e.childNodes[0].classList.remove("fa-check");
     e.childNodes[0].classList.add("fa-spinner", "fa-spin");
+}
+
+let sacarPDF = (carta) => {
+    let link = "/crearpdf/generar/";
+    let arr = [];
+    carta.forEach(function (e) {
+        let sec = []
+        sec.push(e['0'].id, e['0'].ordenSec);
+        arr.push(sec)
+    });
+    arr.sort
+    link += JSON.stringify(arr);
+    ajax(link);
 }
