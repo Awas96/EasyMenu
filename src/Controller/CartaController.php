@@ -40,18 +40,27 @@ class CartaController extends AbstractController
             'tipo' => 'seccion',
             'id' => $seccion->getId(),
             'titulo' => $seccion->getNombre(),
-            'icono' => $seccion->getIcono()
+            'icono' => $seccion->getIcono(),
+            'orden' => "0",
+            'ordenSec' => $seccion->getOrden()
         ]);
         foreach ($elemento as $item) {
-            $elemento = array(
-                'tipo' => 'elemento',
-                'id' => $item->getId(),
-                'nombre' => $item->getNombre(),
-                'precio' => $item->getPrecio(),
-                'descripcion' => $item->getdescripcion(),
-            );
-            array_push($arr, $elemento);
+            if ($item->getVisible() == "1") {
+                $item = array(
+                    'tipo' => 'elemento',
+                    'id' => $item->getId(),
+                    'nombre' => $item->getNombre(),
+                    'precio' => $item->getPrecio(),
+                    'descripcion' => $item->getdescripcion(),
+                    'orden' => $item->getOrden(),
+                );
+                array_push($arr, $item);
+            }
         }
+        dump($arr);
+        usort($arr, function ($a, $b) {
+            return strcmp($a["orden"], $b["orden"]);
+        });
 
         try {
             return new JsonResponse($arr);
