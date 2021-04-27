@@ -30,6 +30,7 @@ class CrearPdfController extends AbstractController
             "Attachment" => true,
             'datos' => $elementos
         ]);
+
         return new PdfResponse(
             $pdf->getOutputFromHtml($html),
             'carta.pdf'

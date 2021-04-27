@@ -3,10 +3,12 @@
 {% block estilos %}
     <link rel="stylesheet" href="{{ asset('css/tabla.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/pdf.css') }}"/>
+    {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
 
 {% block title %}Carta{% endblock %}
+
 
 {% block content %}
     <div class="fondo_imagen">

@@ -202,5 +202,5 @@ let sacarPDF = (carta) => {
     });
     arr.sort
     link += JSON.stringify(arr);
-    ajax(link);
+    window.location.replace(link)
 }
