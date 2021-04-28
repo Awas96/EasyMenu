@@ -13,7 +13,7 @@
 }
 
 .tabla_fila {
-    width: 95%;
+   /* width: 95%;*/
     border-bottom: 2px solid rgba(255, 255, 255, 0.4);
 }
 

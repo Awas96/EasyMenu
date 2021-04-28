@@ -1,28 +1,101 @@
 {% extends 'layout.html.twig' %}
 
-{% block estilos %}
-    <link rel="stylesheet" href="{{ asset('css/tabla.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/pdf.css') }}"/>
-    {{ encore_entry_link_tags('app') }}
-{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ absolute_url(asset('css/reset.css')) }}">
+    <link rel="stylesheet" href="{{ absolute_url(asset('css/base.css')) }}">
+    <link rel="stylesheet" href="{{ absolute_url(asset('css/cabecera.css')) }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    {% block estilos %}
+        <link rel="stylesheet" href="{{ absolute_url(asset('css/tabla.css')) }}"/>
+        <style>
+            .fondo_imagen {
+                background-position: right;
+                background-size: cover;
+                height: 793px;
+                max-height: 793px;
+                width: 1122px;
+            }
 
+            .pdf_listas {
+                font-size: 0.7rem;
+                max-height: 793px;
+            }
+            .pdf_lista {
+                padding-top: 0.5em;
+
+            }
+
+            .pdf_lista div:nth-child(3) {
+
+                max-height: 720px;
+            }
+
+            .pdf_lista tr:nth-child(1) {
+                display: none;
+            }
+
+            .pdf_lista h2 {
+                font-size: 1.3em;
+            }
+
+            .pdf_lista h2 i {
+                align-self: center;
+            }
+
+            .pdf_lista tbody {
+                max-height: 720px;
+                font-size: 0.8em;
+            }
+
+        </style>
+    {% endblock %}
+{% endblock %}
 
 {% block title %}Carta{% endblock %}
 
-
+{% block cabecera %} {% endblock %}
 {% block content %}
-    <div class="fondo_imagen">
-        <div class="pdf_listas">
-            {% for elementos in datos %} {# Aqui estan las secciones que hemos sacado mediante doctrine #}
-                <div class="pdf_lista fondo_imagen">
-                    {% include 'crearCarta/tabla_pdf_partial.html.twig' %}
+    <div>
+        {% set arr = [] %}
+        {% if datos|length > 5 %}
+            {% set parte = [] %}
+            {% set contador = 0 %}
 
-                </div>
+            {% for i in datos %}
+                {% if  contador < 3 %}
+                    {% set parte = parte|merge([i]) %}
+                    {% set contador = contador+1 %}
+                {% else %}
+                    {% set parte = parte|merge([i]) %}
+                    {% set arr = arr|merge([parte]) %}
+                    {% set parte = [] %}
+                    {% set contador = 0 %}
+                {% endif %}
             {% endfor %}
-        </div>
-    </div>
-{% endblock %}
+            {% set arr = arr|merge([parte]) %}
+        {% else %}
+            {% set arr = [] %}
+            {% set arr = arr|merge([datos]) %}
+        {% endif %}
 
-{% block javascripts %}
-    <script src="{{ asset('js/ocultar.js') }}"></script> {# Utilizado para mostrar o esconder elementos quitando o poniendo clases #}
+        {% for indices in arr %}
+
+            <div class="pdf_listas fondo_imagen">
+                <table style="width: 100%; table-layout: fixed">
+                    <tr>
+                        {% for elementos in indices %} {# Aqui estan las secciones que hemos sacado mediante doctrine #}
+                            <td class="pdf_lista ">
+                                <div>
+                                    {% include 'crearCarta/tabla_pdf_partial.html.twig' %}
+                                </div>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}
+{% block footer %} {% endblock %}

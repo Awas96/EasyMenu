@@ -5,6 +5,13 @@ knp_snappy:
         binary: '%env(WKHTMLTOPDF_PATH)%'
         options:
             enable-local-file-access: true
+            enable-internal-links: true
+            enable-external-links: true
+            enable-javascript: true
+            javascript-delay: 1500
+            no-outline: true
+            disable-smart-shrinking: true
+            debug-javascript: true
     image:
         enabled: true
         binary: '%env(WKHTMLTOIMAGE_PATH)%'

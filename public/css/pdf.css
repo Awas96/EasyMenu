@@ -1,7 +1,18 @@
-.pfd_listas {
 
+.contenido {
+    size: A4;
+    max-width: 100%;
+}
+.fondo_imagen {
+    background-position: left;
+}
+.pdf_listas {
+    display: flex;
+    font-size: 0.7em;
 }
 
 .pdf_lista {
-    padding-top: 2em;
+
+    padding-top: 0.5em;
+
 }

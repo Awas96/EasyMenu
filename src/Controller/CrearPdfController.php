@@ -25,16 +25,30 @@ class CrearPdfController extends AbstractController
         foreach ($arr as $el) {
             array_push($elementos, $elementoRepository->listarElementos($el[0]));
         }
-        $html = $this->renderView('crearCarta/exportador.html.twig', [
-            'headline' => "Test pdf generator",
-            "Attachment" => true,
-            'datos' => $elementos
-        ]);
+        switch (2) {
+            case 1:
+                return $this->render('crearCarta/exportador.html.twig', [
+                    'datos' => $elementos
+                ]);
+            case 2:
+                $html = $this->renderView('crearCarta/exportador.html.twig', [
+                    'datos' => $elementos
+                ]);
+        }
 
+        $pdf->setOption('orientation', 'Landscape');
+        $pdf->setOption('page-size', 'A4');
+        $pdf->setOption('dpi', '500');
+        $pdf->setOption('margin-bottom', '0');
+        $pdf->setOption('margin-top', '0');
+        $pdf->setOption('margin-right', '0');
+        $pdf->setOption('margin-left', '0');
+        dump($pdf);
         return new PdfResponse(
             $pdf->getOutputFromHtml($html),
             'carta.pdf'
         );
+
     }
 
     /**

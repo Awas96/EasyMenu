@@ -1,8 +1,4 @@
-{% if elementos[0] is defined %}
-    {% set sect =  elementos[0].seccion.nombre %}
-{% else %}
-    {% set sect = "¡Sección Vacía!" %}
-{% endif %}
+{% set sect =  elementos[0].seccion.nombre %}
 
 <div class="tabla_fondo">
     <h2 class="text-center texto_mas_grande p-3">
@@ -59,26 +55,7 @@
                     </td>
                 {% endif %}
 
-            </tr>
-            <tr class="">
-                <td colspan="3" class="w-100" style="display: none">
-                    <div class="spoiler" style="display: none">
-                        <div class="spoiler_descripcion">{{ i.descripcion }}</div>
-                        <div class="spoiler_imagenes">
-                            {% for a in i.alergenos %}
-                                <div>
-                                    <figure class="display_flex spoiler_figure">
-                                        <img src="{{ asset('img/alergenos/' ~ a.imgruta ) }}"
-                                             title="{{ a.nombre }}"
-                                             alt="{{ a.nombre }}">
-                                        <figcaption>{{ a.descripcion }}</figcaption>
-                                    </figure>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </td>
-            </tr>
+
         {% endfor %}
         </tbody>
     </table>
