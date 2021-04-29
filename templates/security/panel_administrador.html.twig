@@ -5,26 +5,35 @@
     <link rel="stylesheet" href="{{ asset('css/burbujas.css') }}">
     <link rel="stylesheet" href="{{ asset('css/portada.css') }}">
 {% endblock %}
-
-
-{% block title %}Panel de administrador{% endblock %}
-
+ {% block title %}
+     {% if is_granted('ROLE_ADMINISTRADOR') %}
+         Panel de administrador
+     {% else %}
+         Panel de moderador
+     {% endif %}
+ {% endblock %}
 {% block content %}
     <div class="fondo_imagen">
         <div class="portada">
-            <h3 class="portada_titulo texto_mas_grande texto_grueso">Panel de Administrador!</h3>
+            {% if is_granted('ROLE_ADMINISTRADOR') %}
+                <h3 class="portada_titulo texto_mas_grande texto_grueso">Panel de Administrador!</h3>
+            {% else %}
+                <h3 class="portada_titulo texto_mas_grande texto_grueso">Panel de Moderador!</h3>
+            {% endif %}
             <p class="portada_titulo texto_grande texto_grueso">Usted esta logueado como {{ app.user.username }}</p>
             <div class="portada_cuerpo">
                 <div class="portada_fondo ">
-                    <p class="texto_grueso texto_grande">Opciones:</p>
+                    <p class="texto_grueso texto_grande">Opciones</p>
                 </div>
                 <hr>
+                {% if is_granted('ROLE_ADMINISTRADOR') %}
                 <div class="display_flex flex-column">
                     <div class="portada_descripcion botones mb-3">
                         <button class="btn btn-success">Promocionar a Admin</button>
                         <button class="btn btn-success">Modificar usuarios</button>
-                        <button class="btn btn-success">Crear Usuario</button>
+                        <a href="{{ path('app_register') }}" class="btn btn-success">Crear Usuario</a>
                     </div>
+                    {% endif %}
                     <div class="portada_descripcion botones mb-3">
                         <button class="btn btn-success">Imprimir PDF</button>
                         <button class="btn btn-success">Imprimir Imagen</button>

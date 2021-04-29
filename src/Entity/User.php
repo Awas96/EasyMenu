@@ -64,7 +64,6 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $rol = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles = [];
         switch ($rol) {
             case 1:
@@ -74,8 +73,27 @@ class User implements UserInterface
             case 2:
                 array_push($roles, 'ROLE_MODERADOR');
                 break;
+            case 0:
+                $roles = ["ROLE_USER"];
+                break;
+        }
+
+        return $roles;
+
+    }
+
+    public function setRol($roles): self
+    {
+        var_dump($roles);
+        switch ($roles) {
+            case 'ROLE_ADMINISTRADOR':
+                $this->setRoles(1);
+                break;
+            case 'ROLE_MODERADOR':
+                $this->setRoles(2);
+                break;
             default:
-                $roles = ['ROLE_USER'];
+                $this->setRoles(0);
                 break;
         }
 
@@ -85,6 +103,7 @@ class User implements UserInterface
 
     public function setRoles($roles): self
     {
+
         $this->roles = $roles;
 
         return $this;

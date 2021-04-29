@@ -11,15 +11,18 @@
                 <div class="alert alert-danger" role="alert">{{ flashError }}</div>
             {% endfor %}
             <div class="formulario_titulo">
-                <h1>Register</h1>
+                <h1>Registrar nuevo usuario</h1>
             </div>
 
             {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.username) }}
+            {{ form_row(registrationForm.username, {
+                label: 'Nombre de Usuario'
+            }) }}
             {{ form_row(registrationForm.plainPassword, {
                 label: 'Contraseña'
             }) }}
-            <button type="submit" class="btn">Register</button>
+            <button type="submit" class="btn btn-success">Registrar usuario</button>
+            <a href="{{ path('app_panel') }}" class="btn btn-danger">Volver atras</a>
             {{ form_end(registrationForm) }}
         </div>
     </div>

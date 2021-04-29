@@ -35,7 +35,6 @@ class CrearPdfController extends AbstractController
                     'datos' => $elementos
                 ]);
         }
-
         $pdf->setOption('orientation', 'Landscape');
         $pdf->setOption('page-size', 'A4');
         $pdf->setOption('dpi', '500');
