@@ -28,12 +28,19 @@
             <footer class="header_color p-4 ">
                 <div class="display_flex justify-content-around">
                     <span>Jose Antonio Roselló Lopez</span>
+                    {% if is_granted('ROLE_MODERADOR') %}
+                        <div>
+                            <a class="limpar_formato letra_dorada" href="{{ path('app_panel') }}"><i
+                                        class="fas fa-user-cog"></i></a>
+                        </div>
+                    {% endif %}
                     <span class="fw-bolder">©IMS Gamarra Linares 2021
                     {% if not app.user %}
                         <a class="limpar_formato letra_dorada" href="{{ path('app_login') }}">;)</a>
                     {% else %}
                         <a class="limpar_formato letra_dorada" href="{{ path('app_logout') }}">;(</a>
                     {% endif %}
+
                 </span>
                 </div>
             </footer>

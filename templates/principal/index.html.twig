@@ -3,6 +3,7 @@
 {% block estilos %}
     <link rel="stylesheet" href="{{ asset('css/tabla.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/burbujas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/portada.css') }}">
 {% endblock %}
 
 
@@ -14,6 +15,8 @@
         <hr>
         {% if elementos is defined %}
             {% include 'elemento/elementos_listar.partial.html.twig' %}
+        {% else %}
+            {% include 'principal/portada_partial.html.twig' %}
         {% endif %}
         {% block secciones %} {% endblock %}
     </div>
