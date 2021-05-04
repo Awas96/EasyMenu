@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Seccion;
 use App\Form\SeccionType;
+use App\Repository\ElementoRepository;
 use App\Repository\SeccionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -95,20 +96,31 @@ class SeccionesController extends AbstractController
     /**
      * @Route("/secciones/datos", name="secciones_datos")
      */
-    public function getSeccion(SeccionRepository $seccionRepository): Response
+    public function getSeccion(SeccionRepository $seccionRepository, ElementoRepository $elementoRepository): Response
     {
         $secciones = $seccionRepository->findAllOrderBy();
         $arr = [];
 
         foreach ($secciones as $item) {
-            $elemento = array(
-                'id' => $item->getId(),
-                'nombre' => $item->getNombre(),
-                'icono' => $item->getIcono(),
-            );
-            array_push($arr, $elemento);
+            $check = $elementoRepository->findSecOrderBy($item->getId());
+            if ($check != null) {
+                $ok = false;
+                foreach ($check as $objeto) {
+                    if ($objeto->getVisible()) {
+                        $ok = true;
+                        break;
+                    }
+                }
+                if ($ok) {
+                    $elemento = array(
+                        'id' => $item->getId(),
+                        'nombre' => $item->getNombre(),
+                        'icono' => $item->getIcono()
+                    );
+                    array_push($arr, $elemento);
+                }
+            }
         }
-
         try {
             return new JsonResponse($arr);
         } catch (\PdoException $e) {
