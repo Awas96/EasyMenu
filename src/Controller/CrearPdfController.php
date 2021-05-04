@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Repository\ElementoRepository;
 use App\Repository\SeccionRepository;
+use Knp\Bundle\SnappyBundle\Snappy\Response\JpegResponse;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Knp\Snappy\Image;
 use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,10 +15,24 @@ use Symfony\Component\Routing\Annotation\Route;
 class CrearPdfController extends AbstractController
 {
     /**
-     * @Route("/crearpdf/generar/{slug}", name="genera_pdf")
+     * @Route("/crearpdf/{opcion}/generar/{slug}", name="genera_pdf")
      */
-    public function generate_pdf(Pdf $pdf, ElementoRepository $elementoRepository, $slug)
+    public function generate_pdf(Image $image, Pdf $pdf, ElementoRepository $elementoRepository, $slug, $opcion = null)
     {
+
+        $seleccion = null;
+        if ($opcion == 1) {
+            $seleccion = $pdf;
+            $seleccion->setOption('orientation', 'Landscape');
+            $seleccion->setOption('page-size', 'A4');
+            $seleccion->setOption('dpi', '500');
+            $seleccion->setOption('margin-bottom', '0');
+            $seleccion->setOption('margin-top', '0');
+            $seleccion->setOption('margin-right', '0');
+            $seleccion->setOption('margin-left', '0');
+        } else {
+            $seleccion = $image;
+        }
         $arr = json_decode($slug);
         usort($arr, function ($a, $b) {
             return strcmp($a[1], $b[1]);
@@ -35,32 +51,35 @@ class CrearPdfController extends AbstractController
                     'datos' => $elementos
                 ]);
         }
-        $pdf->setOption('orientation', 'Landscape');
-        $pdf->setOption('page-size', 'A4');
-        $pdf->setOption('dpi', '500');
-        $pdf->setOption('margin-bottom', '0');
-        $pdf->setOption('margin-top', '0');
-        $pdf->setOption('margin-right', '0');
-        $pdf->setOption('margin-left', '0');
-        dump($pdf);
-        return new PdfResponse(
-            $pdf->getOutputFromHtml($html),
-            'carta.pdf'
-        );
+
+        dump($seleccion);
+
+        if ($opcion == 1) {
+            return new PdfResponse(
+                $seleccion->getOutputFromHtml($html),
+                'carta.pdf'
+            );
+        } else {
+            return new JpegResponse(
+                $seleccion->getOutputFromHtml($html),
+                'carta.jpg'
+            );
+        }
+
 
     }
 
     /**
-     * @Route("/crearpdf/formulario", name="generarCarta")
+     * @Route("/crearpdf/formulario/{opcion}", name="generar_carta")
      */
-    public function generarCarta(SeccionRepository $seccionRepository): Response
+    public function generarCarta(SeccionRepository $seccionRepository, $opcion): Response
     {
         $secciones = $seccionRepository->findAllOrderBy();
 
 
         return $this->render('crearCarta/generar.html.twig', [
-            'controller_name' => 'PrincipalController',
-            'secciones' => $secciones
+            'secciones' => $secciones,
+            'opcion' => $opcion
         ]);
     }
 
