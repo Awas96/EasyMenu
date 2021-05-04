@@ -25,13 +25,17 @@ class CrearPdfController extends AbstractController
             $seleccion = $pdf;
             $seleccion->setOption('orientation', 'Landscape');
             $seleccion->setOption('page-size', 'A4');
-            $seleccion->setOption('dpi', '500');
+            $seleccion->setOption('orientation', 'Landscape');
             $seleccion->setOption('margin-bottom', '0');
             $seleccion->setOption('margin-top', '0');
             $seleccion->setOption('margin-right', '0');
             $seleccion->setOption('margin-left', '0');
         } else {
             $seleccion = $image;
+            dump($image);
+            $seleccion->setOption('format', 'png');
+            $seleccion->setOption('crop-w', '1122');
+            $seleccion->setOption('quality', '100');
         }
         $arr = json_decode($slug);
         usort($arr, function ($a, $b) {
@@ -62,7 +66,7 @@ class CrearPdfController extends AbstractController
         } else {
             return new JpegResponse(
                 $seleccion->getOutputFromHtml($html),
-                'carta.jpg'
+                'carta.png'
             );
         }
 

@@ -13,7 +13,7 @@
      {% endif %}
  {% endblock %}
 {% block content %}
-    <div class="fondo_imagen">
+    <div class="contenido">
         <div class="portada">
             {% if is_granted('ROLE_ADMINISTRADOR') %}
                 <h3 class="portada_titulo texto_mas_grande texto_grueso">Panel de Administrador!</h3>
@@ -37,7 +37,9 @@
                     <div class="portada_descripcion botones mb-3 display_flex justify-content-between">
                         <a href="{{ path('generar_carta', {'opcion': 1}) }}" class="btn btn-success">Imprimir PDF</a>
                         <a href="{{ path('generar_carta', {'opcion': 2}) }}" class="btn btn-success">Imprimir Imagen</a>
-                        <button class="btn btn-success">Cambiar Contraseña</button>
+                        <a href="{{ path('app_password_change', {'user': app.user.id}) }}" class="btn btn-success">Cambiar
+                            Contraseña</a>
+
                     </div>
                 </div>
             </div>

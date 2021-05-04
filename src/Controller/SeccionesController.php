@@ -33,7 +33,6 @@ class SeccionesController extends AbstractController
      */
     public function acutalizarOrden(Request $request, $sec)
     {
-
         $orden = $request->get('orden');
         $em = $this->getDoctrine()->getManager();
         $seccion = $em->getRepository(Seccion::class)->findById($sec);

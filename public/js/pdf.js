@@ -70,7 +70,7 @@ let escribirSecciones = (data) => {
     botonSeleccionar.classList.add("btn", "btn-success");
     botonVolver.classList.add("btn", "btn-danger");
     botonEventos(botonSeleccionar);
-    botonVolver.href = "/admin";
+    botonVolver.href = "/panel";
     botonera.appendChild(botonVolver);
     botonera.appendChild(botonSeleccionar);
     botonera.classList.add("botones", "text-center", "mt-4");
