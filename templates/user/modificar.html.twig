@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Registro{% endblock %}
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/formulario.css') }}"/>
+{% endblock %}
+{% block content %}
+    <div class="contenido">
+        <div class="formulario texto_grande ">
+
+            <div class="formulario_titulo">
+                <h1>Cambia tu propia contraseña</h1>
+            </div>
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-success">Cambiar Contraseña</button>
+            <a href="{{ path('app_panel') }}" class="btn btn-danger">Volver atras</a>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
