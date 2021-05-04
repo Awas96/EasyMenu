@@ -35,7 +35,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/Admin", name="app_panel")
+     * @Route("/admin", name="app_panel")
      */
     public function panelAdmin()
     {

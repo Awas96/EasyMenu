@@ -37,9 +37,11 @@ class ElementoController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $elemento = $em->getRepository(Elemento::class)->GetElementByID($id);
         $elemento->setOrden($orden);
-        dump($elemento);
+
         try {
             $em->flush();
+            $this->addFlash('notice',
+                'Tus cambios se han guardado!');
             return new jsonresponse(true);
         } catch (\PdoException $e) {
         }
