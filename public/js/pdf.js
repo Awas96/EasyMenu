@@ -32,6 +32,7 @@ let escribirSecciones = (data) => {
         let label = document.createElement("label");
         let icono = document.createElement("i");
         let texto = document.createTextNode(" " + e.nombre);
+
         check.type = "checkbox"
         check.id = "label_" + e.id;
         check.value = e.id;
@@ -51,16 +52,27 @@ let escribirSecciones = (data) => {
 
     /*creacion de boton para continuar*/
     let botonera = document.createElement("div");
-    let boton = document.createElement("button");
-    let icono = document.createElement("i");
-    let texto = document.createTextNode("  Seleccionar");
 
-    icono.classList.add("fas", "fa-check");
-    boton.appendChild(icono);
-    boton.appendChild(texto);
-    boton.classList.add("btn", "btn-success");
-    botonEventos(boton);
-    botonera.appendChild(boton);
+    let botonSeleccionar = document.createElement("button");
+    let iconoSeleccionar = document.createElement("i");
+    let textoSeleccionar = document.createTextNode("  Seleccionar");
+
+    let botonVolver = document.createElement("a");
+    let iconoVolver = document.createElement("i");
+    let textoVolver = document.createTextNode("  Volver Atras");
+
+    iconoSeleccionar.classList.add("fas", "fa-check");
+    iconoVolver.classList.add("fas", "fa-arrow-left");
+    botonSeleccionar.appendChild(iconoSeleccionar);
+    botonSeleccionar.appendChild(textoSeleccionar);
+    botonVolver.appendChild(iconoVolver);
+    botonVolver.appendChild(textoVolver);
+    botonSeleccionar.classList.add("btn", "btn-success");
+    botonVolver.classList.add("btn", "btn-danger");
+    botonEventos(botonSeleccionar);
+    botonVolver.href = "/admin";
+    botonera.appendChild(botonVolver);
+    botonera.appendChild(botonSeleccionar);
     botonera.classList.add("botones", "text-center", "mt-4");
     div.appendChild(botonera);
 
@@ -93,7 +105,6 @@ let leerStorage = () => {
     let values = [],
         keys = Object.keys(sessionStorage),
         i = keys.length;
-    //arreglar cosa para que solo coja los datos del storage si la key empieza por seccion o algo asi yo que se tio
     while (i--) {
         values.push(sessionStorage.getItem(keys[i]));
     }
@@ -193,7 +204,14 @@ let animaBoton = (e) => {
 }
 
 let sacarPDF = (carta) => {
-    let link = "/crearpdf/generar/";
+    let link = ""
+    if (document.querySelector(".js-opcion").dataset.opciones == 1) {
+        link = "/crearpdf/1/generar/";
+    } else {
+        link = "/crearpdf/2/generar/";
+    }
+
+
     let arr = [];
     carta.forEach(function (e) {
         let sec = []

@@ -28,15 +28,16 @@
                 <hr>
                 {% if is_granted('ROLE_ADMINISTRADOR') %}
                 <div class="display_flex flex-column">
-                    <div class="portada_descripcion botones mb-3">
-                        <button class="btn btn-success">Promocionar a Admin</button>
+                    <div class="portada_descripcion botones mb-3 display_flex justify-content-between ">
+                        <button class="btn btn-success">Promoacionar a Admin</button>
                         <button class="btn btn-success">Modificar usuarios</button>
                         <a href="{{ path('app_register') }}" class="btn btn-success">Crear Usuario</a>
                     </div>
                     {% endif %}
-                    <div class="portada_descripcion botones mb-3">
-                        <button class="btn btn-success">Imprimir PDF</button>
-                        <button class="btn btn-success">Imprimir Imagen</button>
+                    <div class="portada_descripcion botones mb-3 display_flex justify-content-between">
+                        <a href="{{ path('generar_carta', {'opcion': 1}) }}" class="btn btn-success">Imprimir PDF</a>
+                        <a href="{{ path('generar_carta', {'opcion': 2}) }}" class="btn btn-success">Imprimir Imagen</a>
+                        <button class="btn btn-success">Cambiar Contraseña</button>
                     </div>
                 </div>
             </div>
