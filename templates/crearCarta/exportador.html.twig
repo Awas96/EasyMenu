@@ -70,7 +70,7 @@
                     {% set parte = parte|merge([i]) %}
                     {% set arr = arr|merge([parte]) %}
                     {% set parte = [] %}
-                    {% set contador = 0 %}
+                    {% set contador = -1 %}
                 {% endif %}
             {% endfor %}
             {% set arr = arr|merge([parte]) %}
