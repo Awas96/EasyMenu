@@ -7,27 +7,35 @@
     </h2>
 </div>
 <hr>
-<div class="tabla_orden tabla_fondo">
+<div class="tabla_fondo">
     <table class="tabla table table-borderless text-center" style="table-layout: fixed">
         <thead class="tabla_cabecera">
         <tr>
             <th>Nombre de Usuario</th>
             <th>Rol</th>
-            <th>Opción</th>
-
+            <th>{% if estado == 1 %}
+                Promocionar
+            {% else %}
+                Modificar
+            {% endif %}
+            </th>
         </tr>
         </thead>
-        <tbody class="texto_grande">
+        <tbody class="">
         {% for i in usuarios %}
             <tr>
                 <td> {{ i.username }}</td>
-                <td>{{ i.roles[0] }}</td>
-                <td>
-
-                    {% if estado == 1 %}
-                        <button class="btn btn-primary">Promocionar</button>
+                <td class=""> {% if i.roles[0] =="ROLE_ADMINISTRADOR" %}
+                        Administrador
                     {% else %}
-                        <button class="btn btn-primary">Modificar</button>
+                        Moderador
+                    {% endif %}
+                </td>
+                <td>
+                    {% if estado == 1 %}
+                        <button class="btn btn-primary"><i class="fas fa-user-check"></i></button>
+                    {% else %}
+                        <button class="btn btn-primary"><i class="fas fa-user-cog"></i></button>
                     {% endif %}
                 </td>
             </tr>
