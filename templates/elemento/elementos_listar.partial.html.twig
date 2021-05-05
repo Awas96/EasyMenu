@@ -40,7 +40,7 @@
     </div>
 {% endif %}
 <div class="tabla_orden tabla_fondo">
-    <table class="tabla table-borderless ">
+    <table class="tabla table table-borderless ">
         <thead class="tabla_cabecera">
         <tr>
             <th class="
@@ -51,7 +51,7 @@
                 Nombre
             </th>
             {% if 'Tapas' not in sect %}
-                <th>Precio</th>
+                <th class="tupla_precio">Precio</th>
             {% endif %}
         </tr>
         </thead>
@@ -89,7 +89,7 @@
                         </td>
                     {% endif %}
                     {% if is_granted('ROLE_MODERADOR') %}
-                        <td>
+                        <td style="width: 7.25em;">
                             <a class="btn btn-outline-dark boton_editar"
                                href="{{ path('elemento_modificar', {'id': i.id}) }}"><i
                                         class="fas fa-edit"></i></a>

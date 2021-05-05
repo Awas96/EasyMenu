@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Listando Usuarios{% endblock %}
+{% block estilos %}
+    <link rel="stylesheet" href="{{ asset('css/tabla.css') }}"/> {% endblock %}
+
+{% block content %}
+    <div class="contenido">
+        {% include  'user/user_listar.partial.html.twig' %}
+        <div class="botones">
+            <a class="btn btn-danger" href="{{ path('app_panel') }}"><i class="fas fa-arrow-left"></i>Volver al
+                panel</a>
+        </div>
+    </div>
+{% endblock %}

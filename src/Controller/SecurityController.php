@@ -79,4 +79,17 @@ class SecurityController extends AbstractController
 
     }
 
+    /**
+     * @Route("/panel/usuarios/{estado}", name="app_panel_listar")
+     */
+    public function gestiona_usuarios(UserRepository $userRepository, $estado)
+    {
+        $users = $userRepository->findAll();
+        return $this->render('user/listar.html.twig', [
+            'usuarios' => $users,
+            'estado' => $estado
+        ]);
+
+    }
+
 }
