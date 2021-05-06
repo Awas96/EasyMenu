@@ -7,6 +7,7 @@ use App\Entity\Elemento;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +28,13 @@ class ElementoType extends AbstractType
                 'expanded' => true,
                 'multiple' => true
 
-            ]);
+            ])
+        ->add('save', SubmitType::class, [
+            'label' => ' ',
+        ])
+        ->add('saveAndAdd', SubmitType::class, [
+            'label' => ' ',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
