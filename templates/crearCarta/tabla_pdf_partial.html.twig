@@ -1,17 +1,17 @@
 {% set sect =  elementos[0].seccion.nombre %}
-
 <div class="tabla_fondo">
     <h2 class="text-center texto_mas_grande p-3">
-        {% if elementos[0].seccion.icono is defined %}
-            {% if elementos[0].seccion.icono is not null %}
-                <i class="fas {{ elementos[0].seccion.icono }}"></i>
+            <span class="texto_grande">
+                 <span> </span>
+                {% if elementos[0].seccion.icono is defined %}
+                    {% if elementos[0].seccion.icono is not null %}
+                        <i class="fas {{ elementos[0].seccion.icono }}"></i>
             {% else %}
-                <i class="fas fa-utensils"></i>
-            {% endif %}
-        {% endif %}
-        <div>
-            <span class="texto_grande">{{ sect }}</span>
-        </div>
+                        <i class="fas fa-utensils"></i>
+                    {% endif %}
+                {% endif %}
+                {{ sect }}
+            </span>
     </h2>
 </div>
 <hr>
@@ -33,30 +33,28 @@
         </thead>
         <tbody>
         {% for i in elementos %}
-
-            <tr class="tabla_fila cursor">
-                <td class="texto_grande">
-                    <div class="
+        <tr class="tabla_fila cursor">
+            <td class="texto_grande">
+                <div class="
                     {% if 'Tapas' in sect %} text-center
                     {% endif %}">
-                        <span> <i class="fas fa-angle-right  mr-1"></i>{{ i.nombre }}</span>
-                    </div>
+                    <span> <i class="fas fa-angle-right  mr-1"></i>{{ i.nombre }}</span>
+                </div>
+            </td>
+            {% if 'Tapas' not in sect %}
+                <td class="tupla_precio texto_grande">
+                        <span style="text-align: end">
 
-                </td>
-                {% if 'Tapas' not in sect %}
-                    <td class="tupla_precio texto_grande">
-                        <span>
                             {% if i.precio < 10 %}
-                                &nbsp
+                                {{i.precio }} €
+                            {% else %}
+                                {{ i.precio }} €
                             {% endif %}
-                            {{ i.precio }}&nbsp€
+
                         </span>
-
-                    </td>
-                {% endif %}
-
-
-        {% endfor %}
+                </td>
+            {% endif %}
+            {% endfor %}
         </tbody>
     </table>
 </div>
