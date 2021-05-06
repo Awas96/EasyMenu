@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Repository\ElementoRepository;
 use App\Repository\SeccionRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Knp\Bundle\SnappyBundle\Snappy\Response\JpegResponse;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
-use Knp\Snappy\Image;
-use Knp\Snappy\Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,25 +18,25 @@ class CrearPdfController extends AbstractController
     /**
      * @Route("/crearpdf/{opcion}/generar/{slug}", name="genera_pdf")
      */
-    public function generate_pdf(Image $image, Pdf $pdf, ElementoRepository $elementoRepository, $slug, $opcion = null)
+    public function generate_pdf(ElementoRepository $elementoRepository, $slug, $opcion = null)
     {
 
         $seleccion = null;
+        $opciones = null;
         if ($opcion == 1) {
-            $seleccion = $pdf;
-            $seleccion->setOption('orientation', 'Landscape');
-            $seleccion->setOption('page-size', 'A4');
-            $seleccion->setOption('orientation', 'Landscape');
-            $seleccion->setOption('margin-bottom', '0');
-            $seleccion->setOption('margin-top', '0');
-            $seleccion->setOption('margin-right', '0');
-            $seleccion->setOption('margin-left', '0');
+
+            $opciones = new Options();
+            $opciones->setIsHtml5ParserEnabled(true);
+            $opciones->setisRemoteEnabled(true);
+            $opciones->setisJavascriptEnabled(true);
+            $opciones->setIsPhpEnabled(true);
+            $seleccion = new Dompdf($opciones);
         } else {
-            $seleccion = $image;
-            dump($image);
-            $seleccion->setOption('format', 'png');
-            $seleccion->setOption('crop-w', '1122');
-            $seleccion->setOption('quality', '100');
+            /* $seleccion = $image;
+             dump($image);
+             $seleccion->setOption('format', 'png');
+             $seleccion->setOption('crop-w', '1122');
+             $seleccion->setOption('quality', '100');*/
         }
         $arr = json_decode($slug);
         usort($arr, function ($a, $b) {
@@ -56,20 +57,26 @@ class CrearPdfController extends AbstractController
                 ]);
         }
 
-        dump($seleccion);
 
         if ($opcion == 1) {
-            return new PdfResponse(
-                $seleccion->getOutputFromHtml($html),
-                'carta.pdf'
-            );
+            $htmls = trim($html, "\t\n\r\0\x0B");
+            $seleccion->loadHtml($htmls);
+            $seleccion->setPaper('A4', 'landscape');
+            $seleccion->render();
+            $seleccion->stream("Carta.pdf", [
+                "Attachment" => true
+            ]);
+
         } else {
             return new JpegResponse(
                 $seleccion->getOutputFromHtml($html),
                 'carta.png'
             );
         }
-
+        try {
+            return new JsonResponse(true);
+        } catch (\PdoException $e) {
+        }
 
     }
 
