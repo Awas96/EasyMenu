@@ -12,6 +12,7 @@
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
+        "dompdf/dompdf": "^1.0",
         "gedmo/doctrine-extensions": "^3.0",
         "jzonta/faker-restaurant": "^2.0",
         "knplabs/knp-snappy-bundle": "^1.8",
