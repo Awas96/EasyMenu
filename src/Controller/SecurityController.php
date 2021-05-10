@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 
+use App\Entity\Seccion;
+use App\Entity\User;
 use App\Form\UserNameType;
 use App\Form\UserPasswordType;
 use App\Repository\UserRepository;
@@ -136,5 +138,23 @@ class SecurityController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/panel/elimina_usuario/{id}", name="app_user_delete")
+     */
+    public function eliminar(Request $request, User $usuario, $id): Response
+    {
+        if ($request->request->has('confirmar')) {
+            $this->getDoctrine()->getManager()->remove($usuario);
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('app_panel', [
+            ]);
+        }
+
+        return $this->render('user/eliminar.html.twig', [
+            'usuario' => $usuario
+        ]);
+    }
+
 
 }

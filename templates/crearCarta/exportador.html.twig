@@ -18,7 +18,16 @@
 
         @page {
             margin: 0;
-
+            page-break-inside: avoid;
+            page-break-after: avoid;
+            page-break-before: avoid;
+        }
+        @media print  {
+            * {
+                page-break-inside: avoid;
+                page-break-after: avoid;
+                page-break-before: avoid;
+            }
         }
         * {
             page-break-inside: avoid;

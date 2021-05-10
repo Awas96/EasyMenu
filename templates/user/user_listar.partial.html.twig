@@ -49,7 +49,7 @@
                     {% endif %}
 
                     {% if i.username != "administrador" %}
-                        <a href="" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        <a href="{{ path('app_user_delete', {'id': i.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                     {% endif %}
                 </td>
                 {% endif %}
