@@ -5,11 +5,13 @@
 {% block javascripts %}
     <script src="{{ asset('js/botonesForm.js') }}"></script>
 {% endblock %}
+
 {% block content %}
+
     <div class="contenido">
         <div class="formulario texto_grande ">
             <div class="formulario_titulo texto_grande">
-                {% if elemento.id %}
+                {% if elemento.id is defined %}
                     <h1 class="texto_grueso">Modificar Elemento</h1>
                 {% else %}
                     <h1 class="texto_grueso ">Crear nuevo Elemento</h1>
@@ -21,7 +23,7 @@
             {{ form_row(form.descripcion) }}
             {{ form_row(form.alergenos) }}
             <div class="botones">
-                {% if elemento.id %}
+                {% if elemento.id is defined and elemento.id is not null %}
                     {{ form_widget(form.saveAndAdd, {
                         'attr': {'class': 'd-none'}}) }}
                 {% else %}
@@ -31,12 +33,12 @@
 
                 {{ form_widget(form.save, {
                     'attr': {'class': ''}}) }}
-                {% if elemento.id is not null %}
-                    <a href="{{ path('elemento_eliminar', {'id': elemento.id, 'sec': elemento.seccion.id}) }}"
+                {% if elemento.id is defined and elemento.id is not null%}
+                    <a href="{{ path('elemento_eliminar', {'id': elemento.id, 'sec': sec}) }}"
                        class="btn btn-danger"><i class="fas fa-trash-alt"></i> </a>
                 {% else %}
                 {% endif %}
-                <a href="{{ path('indexSec', {'sec': elemento.seccion.id}) }}" class="btn btn-info"><i
+                <a href="{{ path('indexSec', {'sec': sec}) }}" class="btn btn-info"><i
                             class="fas fa-arrow-left"></i></a>
             </div>
 

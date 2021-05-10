@@ -75,14 +75,18 @@ class ElementoController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             if(!$form->get('saveAndAdd')->isClicked()) {
+
                 return $this->redirectToRoute('indexSec', [
                     'sec' => $sec
                 ]);
+            } else {
+                $elemento = null;
             }
         }
         return $this->render('elemento/modificar.partial.html.twig', [
             'form' => $form->createView(),
             'elemento' => $elemento,
+            'sec' => $sec
         ]);
     }
 
