@@ -8,78 +8,7 @@
     <link rel="stylesheet" href="{{ absolute_url(asset('css/base.css')) }}">
     <link rel="stylesheet" href="{{ absolute_url(asset('css/cabecera.css')) }}">
     <link rel="stylesheet" href="{{ absolute_url(asset('css/tabla.css')) }}"/>
-    <style>
-
-        @page {
-            margin: 0;
-            page-break-inside: avoid;
-            page-break-after: avoid;
-            page-break-before: avoid;
-            overflow: hidden;
-        }
-
-        @media print {
-            * {
-                page-break-inside: avoid;
-                page-break-after: avoid;
-                page-break-before: avoid;
-            }
-        }
-
-        * {
-            page-break-inside: avoid;
-            page-break-after: avoid;
-            page-break-before: avoid;
-        }
-
-        .fondo_imagen {
-            background-position: right;
-            background-size: cover;
-
-            width: 1122px;
-            padding-bottom: 0;
-            page-break-inside: avoid;
-        }
-
-        .pdf_listas {
-            font-size: 0.7rem;
-            max-height: 793px;
-        }
-
-        .pdf_lista {
-            padding-top: 0.5em;
-
-        }
-
-        .pdf_lista div:nth-child(3) {
-
-            max-height: 720px;
-        }
-
-        .pdf_lista tr:nth-child(1) {
-            display: none;
-        }
-
-        .pdf_lista h2 {
-            font-size: 1.3em;
-        }
-
-        .pdf_lista h2 i {
-            align-self: center;
-        }
-
-        .pdf_lista tbody {
-            max-height: 720px;
-            font-size: 0.8em;
-        }
-        .pdf_lista_altura {
-            /*min-height: 763px*/
-            height: 763px;
-        }
-        .page_break {
-            page-break-after: avoid;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ absolute_url(asset('css/pdf.css')) }}">
 </head>
 <body class="fondo_imagen">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> {# Jquery CDN #}
@@ -112,16 +41,17 @@
 
 {% for indices in arr %}
     <div class="pdf_listas pdf_lista_altura page_break">
-    <table style="width: 100%; table-layout: fixed">
-        <tr>
-            {% for elementos in indices %} {# Aqui estan las secciones que hemos sacado mediante doctrine #}
-                <td class="pdf_lista ">
-                    {% include 'crearCarta/tabla_pdf_partial.html.twig' %}
-                </td>
-            {% endfor %}
-        </tr>
-    </table>
-    </div>{% endfor %}
+        <table style="width: 100%; table-layout: fixed">
+            <tr>
+                {% for elementos in indices %} {# Aqui estan las secciones que hemos sacado mediante doctrine #}
+                    <td class="pdf_lista ">
+                        {% include 'crearCarta/tabla_pdf_partial.html.twig' %}
+                    </td>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+{% endfor %}
 </body>
 </html>
 

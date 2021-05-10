@@ -205,11 +205,7 @@ let animaBoton = (e) => {
 
 let sacarPDF = (carta) => {
     let link = ""
-    if (document.querySelector(".js-opcion").dataset.opciones == 1) {
-        link = "/crearpdf/1/generar/";
-    } else {
-        link = "/crearpdf/2/generar/";
-    }
+    link = "/crearpdf/generar/";
 
 
     let arr = [];

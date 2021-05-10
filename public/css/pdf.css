@@ -1,18 +1,86 @@
+@page {
+    margin: 0;
+    page-break-inside: avoid;
+    page-break-after: avoid;
+    page-break-before: avoid;
 
-.contenido {
-    size: A4;
-    max-width: 100%;
 }
+
+* {
+    page-break-inside: avoid;
+    page-break-after: avoid;
+    page-break-before: avoid;
+}
+
 .fondo_imagen {
-    background-position: left;
+    background-position: right;
+    background-size: cover;
+    width: 1122px;
+    padding-bottom: 0;
+    page-break-inside: avoid;
 }
+
 .pdf_listas {
-    display: flex;
-    font-size: 0.7em;
+    font-size: 0.7rem;
+    max-height: 793px;
 }
 
 .pdf_lista {
-
     padding-top: 0.5em;
+}
 
+.pdf_lista div:nth-child(3) {
+    max-height: 720px;
+}
+
+.pdf_lista tr:nth-child(1) {
+    display: none;
+}
+
+.pdf_lista h2 {
+    font-size: 1.3em;
+}
+
+.pdf_lista h2 i {
+    align-self: center;
+}
+
+.pdf_lista tbody {
+    max-height: 720px;
+    font-size: 0.8em;
+}
+
+.pdf_lista_altura {
+    height: 763px;
+}
+
+.page_break {
+    page-break-after: avoid;
+}
+
+.pdf_titulo {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
+
+.pdf_titulo_texto {
+    width: 50%;
+    margin: 0 auto;
+
+}
+
+.pdf_sect_tapas {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.pdf_sect_nombre::before {
+    font-weight: bolder;
+    font-size: 1.2em;
+    content: "-  ";
+}
+.pdf_sect_precio_inferior::before {
+    content: " ";
+    white-space: pre;
 }

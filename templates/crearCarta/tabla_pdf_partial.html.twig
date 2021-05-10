@@ -1,57 +1,31 @@
 {% set sect =  elementos[0].seccion.nombre %}
-<div class="tabla_fondo">
-    <h2 class="text-center texto_mas_grande p-3">
-            <span class="texto_grande">
-                 <span> </span>
-                {% if elementos[0].seccion.icono is defined %}
-                    {% if elementos[0].seccion.icono is not null %}
-                        <i class="fas {{ elementos[0].seccion.icono }}"></i>
-            {% else %}
-                        <i class="fas fa-utensils"></i>
-                    {% endif %}
-                {% endif %}
-                {{ sect }}
-            </span>
-    </h2>
+<div class="tabla_fondo pdf_titulo">
+    <div class="texto_mas_grande pdf_titulo_texto">
+
+        <span class="fas {{ elementos[0].seccion.icono }}"></span>
+        <span> {{ sect }} </span>
+    </div>
 </div>
 <hr>
 <div class="tabla_orden tabla_fondo">
     <table class="tabla table-borderless ">
-        <thead class="tabla_cabecera">
-        <tr>
-            <th class="
-                {% if 'Tapas' in sect %}
-                    text-center
-                {% endif %}
-                ">
-                Nombre
-            </th>
-            {% if 'Tapas' not in sect %}
-                <th>Precio</th>
-            {% endif %}
-        </tr>
-        </thead>
         <tbody>
         {% for i in elementos %}
         <tr class="tabla_fila cursor">
             <td class="texto_grande">
                 <div class="
-                    {% if 'Tapas' in sect %} text-center
+                    {% if 'Tapas' in sect %} pdf_sect_tapas
                     {% endif %}">
-                    <span> <i class="fas fa-angle-right  mr-1"></i>{{ i.nombre }}</span>
+                    <span class="pdf_sect_nombre">{{ i.nombre }}</span>
                 </div>
             </td>
             {% if 'Tapas' not in sect %}
                 <td class="tupla_precio texto_grande">
-                        <span style="text-align: end">
-
-                            {% if i.precio < 10 %}
-                                {{i.precio }} €
-                            {% else %}
-                                {{ i.precio }} €
-                            {% endif %}
-
-                        </span>
+                    {% if i.precio < 10 %}
+                        <span class="pdf_sect_precio_inferior" > {{ i.precio }} €  </span>
+                    {% else %}
+                        <span>{{ i.precio }} €</span>
+                    {% endif %}
                 </td>
             {% endif %}
             {% endfor %}

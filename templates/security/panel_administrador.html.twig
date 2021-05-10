@@ -36,8 +36,7 @@
                     </div>
                     {% endif %}
                     <div class="portada_descripcion botones mb-3 display_flex justify-content-between">
-                        <a href="{{ path('generar_carta', {'opcion': 1}) }}" class="btn btn-success">Imprimir PDF</a>
-                        <a href="{{ path('generar_carta', {'opcion': 2}) }}" class="btn btn-success">Imprimir Imagen</a>
+                        <a href="{{ path('generar_carta') }}" class="btn btn-success">Imprimir PDF</a>
                         <a href="{{ path('app_password_change', {'user': app.user.id}) }}" class="btn btn-success">Cambiar
                             Contraseña</a>
 
