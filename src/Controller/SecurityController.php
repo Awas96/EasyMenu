@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 
-use App\Form\UserType;
+use App\Form\UserNameType;
+use App\Form\UserPasswordType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,11 +52,11 @@ class SecurityController extends AbstractController
     /**
      * @Route("/panel/contrasenya/{user}", name="app_password_change")
      */
-    public function modifica_Usuario(Request $request, UserPasswordEncoderInterface $passwordEncoder, $user = null, UserRepository $userRepository)
+    public function modifica_Usuario_password(Request $request, UserPasswordEncoderInterface $passwordEncoder, $user = null, UserRepository $userRepository)
     {
 
         $user = $userRepository->findOneById($user);
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserPasswordType::class, $user);
         $form->handleRequest($request);
 
 
@@ -74,10 +75,54 @@ class SecurityController extends AbstractController
 
         return $this->render('user/modificar.html.twig', [
             'form' => $form->createView(),
-            'usuario' => $user
+            'usuario' => $user,
+            'tipo' => 'pw'
         ]);
 
     }
+
+    /**
+     * @Route("/panel/username/{user}", name="app_username_change")
+     */
+    public function modifica_Usuario_username(Request $request, $user = null, UserRepository $userRepository)
+    {
+
+        $user = $userRepository->findOneById($user);
+        $form = $this->createForm(UserNameType::class, $user);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_panel');
+        }
+
+        return $this->render('user/modificar.html.twig', [
+            'form' => $form->createView(),
+            'usuario' => $user,
+            'tipo' => 'un'
+        ]);
+
+    }
+
+    /**
+     * @Route("/panel/pormocionar/{user}", name="app_user_promocionar")
+     */
+    public function modifica_Usuario_rol(Request $request, $user = null, UserRepository $userRepository)
+    {
+
+        $user = $userRepository->findOneById($user);
+        $user->setRoles(1);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_panel');
+
+
+    }
+
 
     /**
      * @Route("/panel/usuarios/{estado}", name="app_panel_listar")
