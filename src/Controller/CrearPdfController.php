@@ -20,7 +20,7 @@ class CrearPdfController extends AbstractController
      */
     public function generate_pdf(ElementoRepository $elementoRepository, $slug, $opcion = null)
     {
-
+        $html = null;
         $seleccion = null;
         $opciones = null;
         if ($opcion == 1) {
@@ -28,15 +28,12 @@ class CrearPdfController extends AbstractController
             $opciones = new Options();
             $opciones->setIsHtml5ParserEnabled(true);
             $opciones->setisRemoteEnabled(true);
-            $opciones->setisJavascriptEnabled(true);
-            $opciones->setIsPhpEnabled(true);
             $seleccion = new Dompdf($opciones);
         } else {
-            /* $seleccion = $image;
-             dump($image);
-             $seleccion->setOption('format', 'png');
-             $seleccion->setOption('crop-w', '1122');
-             $seleccion->setOption('quality', '100');*/
+            $opciones = new Options();
+            $opciones->setIsHtml5ParserEnabled(true);
+            $opciones->setisRemoteEnabled(true);
+            $seleccion = new Dompdf($opciones);
         }
         $arr = json_decode($slug);
         usort($arr, function ($a, $b) {
@@ -55,12 +52,13 @@ class CrearPdfController extends AbstractController
                 $html = $this->renderView('crearCarta/exportador.html.twig', [
                     'datos' => $elementos
                 ]);
+                $html = preg_replace('/>\s+</', "><", $html);
         }
 
 
         if ($opcion == 1) {
-            $htmls = trim($html, "\t\n\r\0\x0B");
-            $seleccion->loadHtml($htmls);
+
+            $seleccion->loadHtml($html);
             $seleccion->setPaper('A4', 'landscape');
             $seleccion->render();
             $seleccion->stream("Carta.pdf", [
@@ -68,10 +66,11 @@ class CrearPdfController extends AbstractController
             ]);
 
         } else {
-            return new JpegResponse(
-                $seleccion->getOutputFromHtml($html),
-                'carta.png'
-            );
+
+            $seleccion->loadHtml($html);
+            $seleccion->setPaper('A4', 'landscape');
+            $seleccion->render();
+            $seleccion->stream("Carta.jpg");
         }
         try {
             return new JsonResponse(true);
