@@ -14,10 +14,11 @@
             <th>Nombre de Usuario</th>
             <th>Rol</th>
             <th>{% if estado == 1 %}
-                Promocionar
-            {% else %}
-                Modificar
-            {% endif %}
+                    Promocionar
+                {% else %}
+                    Modificar
+                {% endif %}
+
             </th>
         </tr>
         </thead>
@@ -33,11 +34,25 @@
                 </td>
                 <td>
                     {% if estado == 1 %}
-                        <button class="btn btn-primary"><i class="fas fa-user-check"></i></button>
+                    {% if i.roles[0] =="ROLE_ADMINISTRADOR" %}
+                        <button disabled class="btn btn-primary"><i class="fas fa-user-check"></i></button>
                     {% else %}
-                        <button class="btn btn-primary"><i class="fas fa-user-cog"></i></button>
+                        <a href="{{ path('app_user_promocionar', {'user': i.id}) }}" class="btn btn-primary"><i
+                                    class="fas fa-user-check"></i></a>
+                    {% endif %}
+                    {% else %}
+                    {% if i.roles[0] =="ROLE_ADMINISTRADOR" and i.username != app.user.username or i.username == "administrador" %}
+                        <button disabled class="btn btn-primary"><i
+                                    class="fas fa-user-cog"></i></button>
+                    {% else %}
+                        <a href='{{ path('app_username_change', {'user': i.id}) }}' class="btn btn-primary"><i class="fas fa-user-cog"></i></a>
+                    {% endif %}
+
+                    {% if i.username != "administrador" %}
+                        <a href="" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                     {% endif %}
                 </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>

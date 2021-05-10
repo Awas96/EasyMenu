@@ -14,7 +14,11 @@
 
             {{ form_start(form) }}
             {{ form_widget(form) }}
+            {% if tipo == 'pw' %}
             <button type="submit" class="btn btn-success">Cambiar Contraseña</button>
+            {% else %}
+            <button type="submit" class="btn btn-success">Cambiar Contraseña</button>
+            {% endif %}
             <a href="{{ path('app_panel') }}" class="btn btn-danger">Volver atras</a>
             {{ form_end(form) }}
         </div>
