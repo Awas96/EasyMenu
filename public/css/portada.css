@@ -30,7 +30,7 @@
 }
 
 .portada_imagen {
-        background-image: radial-gradient(circle, rgba(70, 80, 50, 0.9) 60%, rgba(0, 0, 0, 0.07) 100%);
+        background-image: radial-gradient(circle, royalblue 60%, rgba(0, 0, 0, 0.07) 100%);
         border-radius: 100%;
         padding: 1em;
         margin-bottom: 1em;

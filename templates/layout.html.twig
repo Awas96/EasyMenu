@@ -16,8 +16,8 @@
                     <img class="header_image" src="{{ asset('img/logo.png') }}">
                 </a>
                 <div class="header_texto">
-                    <h1 class="font-weight-bolder texto_mas_grande"> CLUB-79 </h1>
-                    <h2 class="texto_cursivo texto_grande"> Restaurante Antonio Díaz Franco </h2>
+                    <h1 class="font-weight-bolder texto_mas_grande"> Easy Menu </h1>
+                    <h2 class="texto_cursivo texto_grande"> Aplicación de Gestión de carta </h2>
                 </div>
             </div>
         </nav>
@@ -30,15 +30,15 @@
                     <span>Jose Antonio Roselló Lopez</span>
                     {% if is_granted('ROLE_MODERADOR') %}
                         <div>
-                            <a class="limpar_formato letra_dorada" href="{{ path('app_panel') }}"><i
+                            <a class="limpar_formato" href="{{ path('app_panel') }}"><i
                                         class="fas fa-user-cog"></i></a>
                         </div>
                     {% endif %}
-                    <span class="fw-bolder">©IMS Gamarra Linares 2021
+                    <span class="fw-bolder">©Awas
                     {% if not app.user %}
-                        <a class="limpar_formato letra_dorada" href="{{ path('app_login') }}">;)</a>
+                        <a class="limpar_formato" href="{{ path('app_login') }}">;)</a>
                     {% else %}
-                        <a class="limpar_formato letra_dorada" href="{{ path('app_logout') }}">;(</a>
+                        <a class="limpar_formato" href="{{ path('app_logout') }}">;(</a>
                     {% endif %}
 
                 </span>

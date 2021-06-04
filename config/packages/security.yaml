@@ -48,6 +48,5 @@ security:
     - { path: ^/secciones,  roles: ROLE_MODERADOR }
     - { path: ^/crearpdf,   roles: ROLE_MODERADOR }
     - { path: ^/panel,      roles: ROLE_MODERADOR }
-    - { path: ^/register,   roles: ROLE_ADMINISTRADOR }
     # - { path: ^/admin, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }
