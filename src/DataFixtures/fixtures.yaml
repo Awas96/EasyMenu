@@ -63,31 +63,44 @@ App\Entity\Elemento:
     descripcion: 'Aqui va la descripcion del artículo'
     seccion: '@s_*'
     alergenos: "<numberBetween(1,14)>x @a_*"
+    orden: 0
+    visible: true
 
 
 App\Entity\Seccion:
   s_carne:
     nombre: "Carne"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    orden: 0
     icono: "fa-bacon"
   s_verdura:
     nombre: "Verduras"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    orden: 0
     icono: "fa-leaf"
   s_tapas:
     nombre: "Tapas"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    orden: 0
     icono: "fa-utensils"
   s_pescados:
     nombre: "Pescados"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    orden: 0
     icono: "fa-fish"
   s_entrantes:
     nombre: "Entrantes"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    orden: 0
     icono: "fa-utensil-spoon"
   s_cosas{1..10}:
     nombre: "Cosas"
     elementos: "<numberBetween(1, 10)>x @elemento*"
+    orden: 0
 
 
+App\Entity\user:
+  u_Admin:
+    username: "Administrador"
+    roles: 1
+    password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$9wVzZTS4guzReEyoGQ05rA\$lKSu/1Mqo+nG329a3lR6DC87BxEpQ8ZHVX0BjqXc9uk'
