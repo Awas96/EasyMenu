@@ -1,4 +1,4 @@
-Aplicación carta para Club – 79
+Aplicación carta
 
 Vamos a desarrollar una carta de restaurante el cual mediante una pagina web se puede mostrar una carta para que sea visualizada por los clientes de un restaurante mediante un código QR que tendrán a su disposición.
 
